@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 
-import Container from '../components/Container';
+import Blog from './components/Blog';
 
 class App extends Component {
     render() {
@@ -35,7 +35,7 @@ class App extends Component {
                     `}
                     </script>
                 </Helmet>
-                <Container />
+                <Blog />
             </div>
         );
     }
