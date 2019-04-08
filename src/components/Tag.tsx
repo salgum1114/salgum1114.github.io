@@ -4,7 +4,7 @@ class Tag extends Component {
     render() {
         return (
             <div>
-                Tag
+                Tag2
             </div>
         );
     }
