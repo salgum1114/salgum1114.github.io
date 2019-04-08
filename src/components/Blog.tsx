@@ -8,7 +8,7 @@ import Tag from './Tag';
 
 class Blog extends Component {
     render() {
-        console.log(this.props);
+        console.log(this.props, this.context);
         return (
             <Switch>
                 <Container>
