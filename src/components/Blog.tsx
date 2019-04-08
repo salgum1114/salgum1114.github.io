@@ -13,8 +13,8 @@ class Blog extends Component {
                 <Switch>
                     <Container>
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/about" component={About} />
-                        <Route exact path="/tag" component={Tag} />
+                        <Route path="/about" component={About} />
+                        <Route path="/tag" component={Tag} />
                     </Container>
                 </Switch>
             </Router>
