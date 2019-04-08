@@ -12,7 +12,7 @@ class App extends Component {
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <link rel="manifest" href="/manifest.json" />
                     <link rel="shortcut icon" href="/favicon.ico" />
-                    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" />
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" />
                     <title>Dev.log</title>
                     <script type="text/javascript">
                     {`
