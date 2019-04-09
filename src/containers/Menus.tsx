@@ -60,9 +60,9 @@ class Menus extends Component<IProps, IState> {
         });
     }
 
-    buildPath = (): string => {
+    buildPath = (length: number = 4): string => {
         const { selectedKey } = this.state;
-        const idPath = selectedKey.split('/').length === 4;
+        const idPath = selectedKey.split('/').length === length;
         if (idPath) {
             const lastIndex = selectedKey.lastIndexOf('/');
             return selectedKey.substring(0, lastIndex);
@@ -112,13 +112,13 @@ class Menus extends Component<IProps, IState> {
     render() {
         const { routes } = this.props;
         const { selectedKey } = this.state;
-        console.log(this.buildPath());
+        const pathname = this.buildPath() || selectedKey;
         return (
             <Menu
                 mode="inline"
-                defaultSelectedKeys={[this.buildPath() || selectedKey]}
+                defaultSelectedKeys={[pathname]}
                 defaultOpenKeys={routes.map(r => r.path)}
-                selectedKeys={[this.buildPath() || selectedKey]}
+                selectedKeys={[pathname]}
             >
                 {this.renderMenus()}
             </Menu>

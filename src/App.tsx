@@ -9,6 +9,7 @@ import Posts from './containers/Posts';
 import Post from './containers/Post';
 import ErrorPage from './components/ErrorPage';
 import Tags from './containers/Tags';
+import { postSerivces } from './services';
 
 interface IProps {
     routes: IRoute[];
@@ -51,6 +52,22 @@ const MainRoute = withRouter((props: any) => {
 });
 
 class App extends Component<IProps> {
+    componentDidMount() {
+        this.getPosts();
+    }
+
+    getPosts = async () => {
+        try {
+            const response = await postSerivces.getAllPosts();
+            const posts = response.data;
+            const fResult = await Promise.all(posts.map((post: string) => postSerivces.getPosts(`/_posts/${post}`)));
+            const sResult = await Promise.all(fResult.map(r => Promise.all(r.data.map(d => postSerivces.getPost(`${r.config.url}/${d}`)))));
+            console.log(sResult);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     getComponent = (layout: string) => {
         if (layout === 'posts') {
             return Posts;
@@ -68,7 +85,12 @@ class App extends Component<IProps> {
             <Switch key={route.path}>
                 {this.route(route)}
                 {
-                    route.routes ? route.routes.map(subRoute => this.route(subRoute)) : null
+                    route.routes ? route.routes.reduce((p, c) => {
+                        if (c.routes) {
+                            return p.concat(this.route(c)).concat(c.routes.map(r => this.route(r)));
+                        }
+                        return p.concat(this.route(c));
+                    }, []) : null
                 }
             </Switch>,
         )
@@ -78,6 +100,7 @@ class App extends Component<IProps> {
         <Route
             key={route.path}
             path={route.path}
+            exact={true}
             component={this.getComponent(route.layout)}
         />
     )

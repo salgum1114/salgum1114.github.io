@@ -23,7 +23,7 @@
                 "path": "/posts/fabricjs",
                 "title": "Fabric.js",
                 "isMenu": true,
-                "order": 10,
+                "order": 20,
                 "layout": "posts",
                 "routes": [
                     {
@@ -36,7 +36,7 @@
                 "path": "/posts/css",
                 "title": "CSS",
                 "isMenu": true,
-                "order": 10,
+                "order": 30,
                 "layout": "posts",
                 "routes": [
                     {
@@ -44,10 +44,6 @@
                         "layout": "post"
                     }
                 ]
-            },
-            {
-                "path": "/posts/:id",
-                "layout": "post"
             }
         ]
     },

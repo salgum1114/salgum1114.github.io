@@ -1,3 +1,3 @@
 import instance from './instance';
 
-export const getAuthors = () => instance.get('/authors.json');
+export const getAuthors = () => instance.get('/_metadata/authors.json');

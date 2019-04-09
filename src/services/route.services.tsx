@@ -1,3 +1,3 @@
 import instance from './instance';
 
-export const getRoutes = () => instance.get('/routes.json');
+export const getRoutes = () => instance.get('/_metadata/routes.json');
