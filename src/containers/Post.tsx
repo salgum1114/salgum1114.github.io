@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Tag extends Component {
+class Post extends Component {
     render() {
         return (
             <div>
-                Tag4
+                Post2213131
             </div>
         );
     }
 }
 
-export default Tag;
+export default Post;

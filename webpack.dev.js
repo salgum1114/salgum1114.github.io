@@ -27,7 +27,7 @@ module.exports = merge(baseConfig, {
     devServer: {
         inline: true,
         port: devPort,
-        contentBase: path.resolve(__dirname, '/'),
+        contentBase: path.resolve(__dirname, './'),
         hot: true,
         publicPath: '/',
         historyApiFallback: true,
