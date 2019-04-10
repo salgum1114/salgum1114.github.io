@@ -34,3 +34,5 @@ export interface IRoute {
     layout?: 'posts' | 'post';
     routes: IRoute[];
 }
+
+export interface StringToMap<T> { [key: string]: T };

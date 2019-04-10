@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
+import { RouteChildrenProps } from 'react-router';
 
 import Title from './Title';
 import { CSSMapper, IRoute } from '../types/utils';
@@ -15,9 +16,8 @@ const styles: CSSMapper = {
     },
 }
 
-interface IProps {
+interface IProps extends RouteChildrenProps {
     routes: IRoute[];
-    location: Location,
 }
 
 interface IState {
@@ -30,11 +30,22 @@ class Container extends Component<IProps, IState> {
     }
 
     componentDidMount() {
+        this.initBrowserRefresh();
         Events.on('menucollapse', () => {
             this.setState({
                 collapsed: !this.state.collapsed,
             });
         });
+    }
+
+    initBrowserRefresh = () => {
+        window.onbeforeunload = () => {
+            if (this.props.location && this.props.location.state) {
+                this.props.history.push({
+                    state: {},
+                });
+            }
+        };
     }
 
     render() {

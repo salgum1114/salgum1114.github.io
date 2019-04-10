@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import sortBy from 'lodash/sortBy';
 
 import { IRoute } from '../types/utils';

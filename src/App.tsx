@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { bindActionCreators, Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route, matchPath, withRouter } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
 
@@ -9,11 +11,16 @@ import Posts from './containers/Posts';
 import Post from './containers/Post';
 import ErrorPage from './components/ErrorPage';
 import Tags from './containers/Tags';
-import { postSerivces } from './services';
+import { metadataService } from './services';
+import { PostActions } from './actions/posts';
+import { AuthorActions } from './actions/authors';
 
 interface IProps {
     routes: IRoute[];
-}
+    setPosts: (args?: any) => void;
+    setMetadata: (args?: any) => void;
+    setAuthors: (args?: any) => void;
+};
 
 const invalidPath = (routes: IRoute[], path: string) => {
     return routes.some((route: IRoute) => {
@@ -53,22 +60,18 @@ const MainRoute = withRouter((props: any) => {
 
 class App extends Component<IProps> {
     componentDidMount() {
-        this.getPosts();
+        metadataService.getAuthors().then(response => {
+            this.props.setAuthors(response.data);
+        });
+        metadataService.getMetadata().then(response => {
+            this.props.setMetadata(response.data);
+        });
+        metadataService.getPosts().then(response => {
+            this.props.setPosts(response.data);
+        });
     }
 
-    getPosts = async () => {
-        try {
-            const response = await postSerivces.getAllPosts();
-            const posts = response.data;
-            const fResult = await Promise.all(posts.map((post: string) => postSerivces.getPosts(`/_posts/${post}`)));
-            const sResult = await Promise.all(fResult.map(r => Promise.all(r.data.map(d => postSerivces.getPost(`${r.config.url}/${d}`)))));
-            console.log(sResult);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    getComponent = (layout: string) => {
+    getRouteComponent = (layout: string): any => {
         if (layout === 'posts') {
             return Posts;
         } else if (layout === 'post') {
@@ -101,7 +104,7 @@ class App extends Component<IProps> {
             key={route.path}
             path={route.path}
             exact={true}
-            component={this.getComponent(route.layout)}
+            component={this.getRouteComponent(route.layout)}
         />
     )
 
@@ -121,4 +124,10 @@ class App extends Component<IProps> {
     }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
+    setPosts: PostActions.setPosts,
+    setMetadata: PostActions.setMetadata,
+    setAuthors: AuthorActions.setAuthors,
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(App);

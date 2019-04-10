@@ -6,13 +6,13 @@ import { AppContainer } from 'react-hot-loader';
 import App from './App';
 import './styles/index.less';
 import store from './store';
-import { routeServices } from './services';
 import { IRoute } from './types/utils';
+import { metadataService } from './services';
 
 const init = async () => {
     let routes: IRoute[] = [];
     try {
-        const response = await routeServices.getRoutes();
+        const response = await metadataService.getRoutes();
         routes = response.data;
     } catch (error) {
         console.error('Network error');

@@ -1,9 +1,9 @@
-import posts, { IPostsState } from './posts';
-import authors, { IAuthorsState } from './authors';
+import posts, { IPostState } from './posts';
+import authors, { IAuthorState } from './authors';
 
 export interface IReducer {
-    posts: IPostsState;
-    authors: IAuthorsState;
+    posts: IPostState;
+    authors: IAuthorState;
 }
 
 export {

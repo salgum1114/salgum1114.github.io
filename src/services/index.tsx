@@ -1,9 +1,5 @@
-import * as routeServices from './route.services';
-import * as authorServices from './author.service';
-import * as postSerivces from './post.services';
+import * as metadataService from './metadata.service';
 
 export {
-    routeServices,
-    authorServices,
-    postSerivces,
-};
+    metadataService,
+}

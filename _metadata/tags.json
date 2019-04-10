@@ -1,0 +1,18 @@
+{
+	"blog": {
+		"total": 3,
+		"paths": [
+			"./_posts/css/2019-04-09-css.md",
+			"./_posts/fabricjs/2019-04-09-fabricjs.md",
+			"./_posts/reactjs/2019-04-09-reactjs.md"
+		]
+	},
+	"start": {
+		"total": 3,
+		"paths": [
+			"./_posts/css/2019-04-09-css.md",
+			"./_posts/fabricjs/2019-04-09-fabricjs.md",
+			"./_posts/reactjs/2019-04-09-reactjs.md"
+		]
+	}
+}

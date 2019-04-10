@@ -7,43 +7,8 @@
         "layout": "posts",
         "routes": [
             {
-                "path": "/posts/reactjs",
-                "title": "React",
-                "isMenu": true,
-                "order": 10,
-                "layout": "posts",
-                "routes": [
-                    {
-                        "path": "/posts/reactjs/:id",
-                        "layout": "post"
-                    }
-                ]
-            },
-            {
-                "path": "/posts/fabricjs",
-                "title": "Fabric.js",
-                "isMenu": true,
-                "order": 20,
-                "layout": "posts",
-                "routes": [
-                    {
-                        "path": "/posts/fabricjs/:id",
-                        "layout": "post"
-                    }
-                ]
-            },
-            {
-                "path": "/posts/css",
-                "title": "CSS",
-                "isMenu": true,
-                "order": 30,
-                "layout": "posts",
-                "routes": [
-                    {
-                        "path": "/posts/css/:id",
-                        "layout": "post"
-                    }
-                ]
+                "path": "/posts/:id",
+                "layout": "post"
             }
         ]
     },
