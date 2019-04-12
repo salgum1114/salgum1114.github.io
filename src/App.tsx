@@ -60,14 +60,14 @@ const MainRoute = withRouter((props: any) => {
 
 class App extends Component<IProps> {
     componentDidMount() {
+        metadataService.getPosts().then(response => {
+            this.props.setPosts(response.data);
+        });
         metadataService.getAuthors().then(response => {
             this.props.setAuthors(response.data);
         });
         metadataService.getMetadata().then(response => {
             this.props.setMetadata(response.data);
-        });
-        metadataService.getPosts().then(response => {
-            this.props.setPosts(response.data);
         });
     }
 

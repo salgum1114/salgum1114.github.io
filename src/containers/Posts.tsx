@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Col, Card, Avatar } from 'antd';
 import moment from 'moment';
+import isEmpty from 'lodash/isEmpty';
 
 import { CSSMapper } from '../types/utils';
 import EmptyPage from '../components/EmptyPage';
@@ -12,7 +13,7 @@ import { IPost } from '../types/post';
 import { IAuthor } from '../types/author';
 
 interface IProps extends RouteChildrenProps {
-    metadatas: IPost[];
+    metadatas: Record<string, IPost>;
     authors: Record<string, IAuthor>;
 }
 
@@ -60,22 +61,21 @@ const styles: CSSMapper = {
 class Posts extends Component<IProps> {
     renderCard = () => {
         const { metadatas, history, location, authors } = this.props;
-        return metadatas.length ? (
-            metadatas.map(metadata => {
-                const metadataSplit = metadata.path.split('/');
-                const id = metadataSplit[metadataSplit.length - 1];
+        return !isEmpty(metadatas) ? (
+            Object.keys(metadatas).map(key => {
+                const metadata = metadatas[key];
                 const author = authors[metadata.author];
                 return (
-                    <Col key={id} className="container-col" xs={24} md={24} lg={12} xl={8} xxl={6}>
+                    <Col key={key} className="container-col" xs={24} md={24} lg={12} xl={8} xxl={6}>
                         <Card
                             hoverable={true}
                             onClick={() => {
-                                const pathname = `/posts/${id}`;
+                                const pathname = key;
                                 location.pathname = pathname;
                                 history.push(pathname);
                             }}
                             cover={
-                                <Link style={styles.cardCover} to={`/posts/${id}`}>
+                                <Link style={styles.cardCover} to={key}>
                                     <img
                                         style={styles.cardThumbnail}
                                         alt="logo"

@@ -6,13 +6,13 @@ import { PostTypes } from '../actions/posts';
 export interface IPostState extends IInitialState {
     posts: Record<string, IPost>;
     post: IPost;
-    metadatas: IPost[];
+    metadatas: Record<string, IPost>;
 }
 
 const initialState: IPostState = {
     posts: {},
     post: {},
-    metadatas: [],
+    metadatas: {},
 };
 
 export default function posts(state = initialState, action: IPayload<{ data?: any }>) {

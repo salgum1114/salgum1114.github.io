@@ -15,11 +15,11 @@ const ErrorPage = (props: any) => {
     };
 
     return (
-        <div className="error-box">
-            <div className="error-image">
-                <div className="error-image-element" style={getImage(props.status)} />
+        <div className="blog-error-box">
+            <div className="blog-error-image">
+                <div className="blog-error-image-element" style={getImage(props.status)} />
             </div>
-            <div className="error-content">
+            <div className="blog-error-content">
                 <h1>{props.status || 0} 페이지를 찾을 수 없습니다.</h1>
             </div>
         </div>

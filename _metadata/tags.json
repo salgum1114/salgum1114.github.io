@@ -1,18 +1,22 @@
 {
 	"blog": {
-		"total": 3,
+		"total": 5,
 		"paths": [
-			"./_posts/css/2019-04-09-css.md",
-			"./_posts/fabricjs/2019-04-09-fabricjs.md",
-			"./_posts/reactjs/2019-04-09-reactjs.md"
+			"/posts/css/2019-04-09-css",
+			"/posts/fabricjs/2019-04-09-fabricjs",
+			"/posts/reactjs/2019-04-09-reactjs",
+			"/posts/reactjs/2019-04-10-reactjs",
+			"/posts/reactjs/2019-04-11-reactjs"
 		]
 	},
 	"start": {
-		"total": 3,
+		"total": 5,
 		"paths": [
-			"./_posts/css/2019-04-09-css.md",
-			"./_posts/fabricjs/2019-04-09-fabricjs.md",
-			"./_posts/reactjs/2019-04-09-reactjs.md"
+			"/posts/css/2019-04-09-css",
+			"/posts/fabricjs/2019-04-09-fabricjs",
+			"/posts/reactjs/2019-04-09-reactjs",
+			"/posts/reactjs/2019-04-10-reactjs",
+			"/posts/reactjs/2019-04-11-reactjs"
 		]
 	}
 }

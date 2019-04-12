@@ -2,10 +2,21 @@
     {
         "path": "/posts",
         "title": "개발 일지",
-        "isMenu": true,
         "order": 10,
         "layout": "posts",
         "routes": [
+            {
+                "path": "/posts/css/:id",
+                "layout": "post"
+            },
+            {
+                "path": "/posts/fabricjs/:id",
+                "layout": "post"
+            },
+            {
+                "path": "/posts/reactjs/:id",
+                "layout": "post"
+            },
             {
                 "path": "/posts/:id",
                 "layout": "post"
@@ -15,12 +26,19 @@
     {
         "path": "/tags",
         "title": "전체 태그",
-        "isMenu": true,
         "order": 20,
         "layout": "tags"
     },
     {
-        "path": "/account",
-        "order": 100
+        "path": "/authors",
+        "title": "전체 글쓴이",
+        "order": 100,
+        "layout": "authors",
+        "routes": [
+            {
+                "path": "/authors/:id",
+                "layout": "author"
+            }
+        ]
     }
 ]

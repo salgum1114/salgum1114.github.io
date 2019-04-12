@@ -29,6 +29,7 @@
   "homepage": "https://salgum1114.github.io",
   "dependencies": {
     "@types/antd": "^1.0.0",
+    "@types/classnames": "^2.2.7",
     "@types/lodash": "^4.14.123",
     "@types/node": "^11.13.0",
     "@types/react-redux": "^7.0.6",

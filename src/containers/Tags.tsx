@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import { Tag } from 'antd';
+import { TagProps } from 'antd/lib/tag';
 
-class Tags extends Component {
+export interface ITagsProps extends TagProps {
+    tags?: string[];
+    style?: React.CSSProperties;
+    tagStyle?: React.CSSProperties;
+}
+
+class Tags extends Component<ITagsProps> {
     render() {
-        console.log(this.props);
+        const { tags, style, tagStyle, ...other } = this.props;
         return (
-            <div>
-                Tags
+            <div style={style}>
+                {tags.map((tag, index) => <Tag key={`${tag}_${index}`} style={tagStyle} {...other}>{tag}</Tag>)}
             </div>
         );
     }

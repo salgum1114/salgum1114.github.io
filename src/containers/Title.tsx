@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd';
+import { Link } from 'react-router-dom';
 
 import { CSSMapper } from '../types/utils';
 import Events from '../utils/Events';
@@ -12,8 +13,12 @@ const styles: CSSMapper = {
     },
     menuCollapse: {
         display: 'flex',
+        height: 40,
+        width: 40,
         justifyContent: 'flex-start',
+        alignItems: 'center',
         marginLeft: 16,
+        cursor: 'pointer',
     },
 };
 
@@ -23,7 +28,7 @@ interface IState {
 
 class Title extends Component<{}, IState> {
     state: IState = {
-        collapsed: false,
+        collapsed: true,
     }
 
     componentDidMount() {
@@ -39,12 +44,14 @@ class Title extends Component<{}, IState> {
     }
 
     render() {
-        const { collapsed } = this.state;
         return (
             <div style={styles.container}>
-                <div style={styles.menuCollapse}>
-                    <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.handleCollapse} />
-                </div>
+                <Link style={styles.menuCollapse} to="/posts">
+                    <Icon style={{ fontSize: '1.25rem' }} type="bars" />
+                </Link>
+                {/* <div style={styles.menuCollapse} onClick={this.handleCollapse}>
+                    <Icon style={{ fontSize: '1.25rem' }} type="bars" />
+                </div> */}
             </div>
         );
     }

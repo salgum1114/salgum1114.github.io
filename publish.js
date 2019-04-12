@@ -23,7 +23,7 @@ const getFiles = (dir, files = []) => {
 
 const filePath = getFiles(postPath);
 
-const metadatas = [];
+const metadatas = {};
 const posts = {};
 const tags = {};
 
@@ -33,23 +33,23 @@ filePath.forEach((path) => {
     const file = fs.readFileSync(path, {
         encoding,
     });
-    const splitFile = file.split('---');
-    const metadataStr = splitFile[1];
-    const content = splitFile[2];
+    const metadataStr = file.split('---', 2)[1].trim();
+    const content = file.substring(metadataStr.length + 10);
     const html = converter.makeHtml(content);
     let preview = htmlToText.fromString(html, {
         ignoreHref: true,
         ignoreImage: true,
     });
     if (preview && preview.length > 100) {
-        preview = `${preview.substr(0, 100)}...`;
+        preview = `${preview.substring(0, 100)}...`;
     }
+    const newPath = `/posts/${path.substring(9, path.length - 3)}`;
     const metadata = {
-        path,
+        path: newPath,
         preview,
     };
     const post = {
-        path,
+        path: newPath,
         content: html,
     };
     metadataStr.split('\r\n').forEach((metaStr, index) => {
@@ -67,14 +67,14 @@ filePath.forEach((path) => {
                             Object.assign(tags, {
                                 [trimTag]: {
                                     total: tags[trimTag].total + 1,
-                                    paths: tags[trimTag].paths.concat(path),
+                                    paths: tags[trimTag].paths.concat(newPath),
                                 },
                             });
                         } else {
                             Object.assign(tags, {
                                 [trimTag]: {
                                     total: 1,
-                                    paths: [path],
+                                    paths: [newPath],
                                 },
                             });
                         }
@@ -83,8 +83,8 @@ filePath.forEach((path) => {
             }
         }
     });
-    metadatas.push(metadata);
-    Object.assign(posts, { [path]: post });
+    Object.assign(metadatas, { [newPath]: metadata });
+    Object.assign(posts, { [newPath]: post });
 });
 
 fs.writeFileSync(metadataPath, JSON.stringify(metadatas, null, '\t'), {
