@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { BrowserRouter, Switch, Route, matchPath, withRouter } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, matchPath, withRouter, Redirect } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
 
 import Container from './containers/Container';
@@ -115,7 +115,13 @@ class App extends Component<IProps> {
             <BrowserRouter>
                 <Switch>
                     <MainRoute routes={routes}>
-                        <Route exact={true} path="/" component={Home} />
+                        <Route
+                            exact={true}
+                            path="/"
+                            render={() => {
+                                return <Redirect to="/posts" />
+                            }}
+                        />
                         {mRoutes}
                     </MainRoute>
                 </Switch>

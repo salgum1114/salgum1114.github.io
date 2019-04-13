@@ -28,7 +28,7 @@ interface IState {
 
 const styles: CSSMapper = {
     container: { display: 'flex', justifyContent: 'center' },
-    viewContainer: { maxWidth: 992, flex: 1 },
+    viewContainer: { maxWidth: 992, flex: 1, width: 'inherit' },
     title: { fontSize: '2.5em', lineHeight: '3.2rem', wordBreak: 'break-word' },
     createdTime: { fontSize: '1.125em', color: '#868e96', margin: '16px 0' },
     authorInfo: { margin: '32px 0 32px 0' },
@@ -44,6 +44,7 @@ class Post extends Component<IProps, IState> {
     }
 
     componentDidMount() {
+        document.querySelector('.ant-layout-content').scrollTo(0, 0);
         const { location, posts, authors } = this.props;
         this.getPost(location, posts, authors);
     }

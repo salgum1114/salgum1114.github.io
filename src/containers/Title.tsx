@@ -13,12 +13,16 @@ const styles: CSSMapper = {
     },
     menuCollapse: {
         display: 'flex',
-        height: 40,
-        width: 40,
         justifyContent: 'flex-start',
-        alignItems: 'center',
         marginLeft: 16,
         cursor: 'pointer',
+    },
+    search: {
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginRight: 16,
     },
 };
 
@@ -46,12 +50,14 @@ class Title extends Component<{}, IState> {
     render() {
         return (
             <div style={styles.container}>
-                <Link style={styles.menuCollapse} to="/posts">
-                    <Icon style={{ fontSize: '1.25rem' }} type="bars" />
-                </Link>
-                {/* <div style={styles.menuCollapse} onClick={this.handleCollapse}>
-                    <Icon style={{ fontSize: '1.25rem' }} type="bars" />
-                </div> */}
+                <div style={styles.menuCollapse}>
+                    <Link to="/posts">
+                        <Icon style={{ fontSize: '1.25rem' }} type="bars" />
+                    </Link>
+                </div>
+                <div style={styles.search}>
+                    <Icon style={{ fontSize: '1.25rem' }} type="search" onClick={this.handleCollapse} />
+                </div>
             </div>
         );
     }

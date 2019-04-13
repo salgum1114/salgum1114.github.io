@@ -8,6 +8,7 @@ import { CSSMapper, IRoute } from '../types/utils';
 import Events from '../utils/Events';
 import Menus from './Menus';
 import Dialog from '../components/Dialog';
+import Search from './Search';
 
 const styles: CSSMapper = {
     theme: {
@@ -54,7 +55,7 @@ class Container extends Component<IProps, IState> {
     }
 
     render() {
-        const { children, routes } = this.props;
+        const { children } = this.props;
         const { collapsed } = this.state;
         return (
             <Layout style={{ height: '100%' }}>
@@ -71,14 +72,13 @@ class Container extends Component<IProps, IState> {
                             component: (
                                 <Dialog
                                     visible={collapsed}
-                                    placement="left"
                                     closable={false}
-                                    width={300}
+                                    width="50%"
                                     contentStyle={{ padding: 0 }}
                                     titleStyle={{ display: 'none' }}
                                     footerStyle={{ display: 'none' }}
                                 >
-                                    <Menus routes={routes} pathname={this.props.location.pathname} />
+                                    <Search />
                                 </Dialog>
                             ),
                         },
@@ -87,14 +87,13 @@ class Container extends Component<IProps, IState> {
                             component: (
                                 <Dialog
                                     visible={collapsed}
-                                    placement="left"
                                     closable={false}
                                     width="75%"
                                     contentStyle={{ padding: 0 }}
                                     titleStyle={{ display: 'none' }}
                                     footerStyle={{ display: 'none' }}
                                 >
-                                    <Menus routes={routes} pathname={this.props.location.pathname} />
+                                    <Search />
                                 </Dialog>
                             ),
                         }

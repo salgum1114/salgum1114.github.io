@@ -59,6 +59,10 @@ const styles: CSSMapper = {
 }
 
 class Posts extends Component<IProps> {
+    componentDidMount() {
+        document.querySelector('.ant-layout-content').scrollTo(0, 0);
+    }
+
     renderCard = () => {
         const { metadatas, history, location, authors } = this.props;
         return !isEmpty(metadatas) ? (
