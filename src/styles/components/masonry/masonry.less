@@ -1,0 +1,31 @@
+/** Masonry 컴포넌트 스타일 **/
+.@{masonry-prefix-cls}-sizer, .@{masonry-prefix-cls}-item {
+    width: 50%;
+}
+
+@media only screen and (min-width: 1200px) {
+    .@{masonry-prefix-cls}-item {
+        width: 50%;
+        &.col-12 {
+            width: 100%;
+        }
+        &.col-8 {
+            width: 75%;
+        }
+        &.col-6 {
+            width: 50%;
+        }
+        &.col-4 {
+            width: 33.33333%;
+        }
+        &.col-3 {
+            width: 25%;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .@{masonry-prefix-cls}-item {
+        width: 100%;
+    }
+}

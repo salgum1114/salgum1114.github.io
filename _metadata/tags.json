@@ -1,21 +1,26 @@
 {
-	"blog": {
-		"total": 5,
+	"css": {
+		"total": 1,
 		"paths": [
-			"/posts/css/2019-04-09-css",
-			"/posts/fabricjs/2019-04-09-fabricjs",
-			"/posts/reactjs/2019-04-09-reactjs",
-			"/posts/reactjs/2019-04-10-reactjs",
-			"/posts/reactjs/2019-04-11-reactjs"
+			"/posts/css/2019-04-09-css"
 		]
 	},
-	"start": {
-		"total": 5,
+	"fabricjs": {
+		"total": 1,
 		"paths": [
-			"/posts/css/2019-04-09-css",
-			"/posts/fabricjs/2019-04-09-fabricjs",
+			"/posts/fabricjs/2019-04-09-fabricjs"
+		]
+	},
+	"react": {
+		"total": 2,
+		"paths": [
 			"/posts/reactjs/2019-04-09-reactjs",
-			"/posts/reactjs/2019-04-10-reactjs",
+			"/posts/reactjs/2019-04-10-reactjs"
+		]
+	},
+	"reactjs": {
+		"total": 1,
+		"paths": [
 			"/posts/reactjs/2019-04-11-reactjs"
 		]
 	}

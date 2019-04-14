@@ -5,7 +5,6 @@ import { BrowserRouter, Switch, Route, matchPath, withRouter, Redirect } from 'r
 import isEmpty from 'lodash/isEmpty';
 
 import Container from './containers/Container';
-import Home from './components/Home';
 import { IRoute } from './types/utils';
 import Posts from './containers/Posts';
 import Post from './containers/Post';

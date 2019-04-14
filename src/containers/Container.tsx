@@ -6,7 +6,6 @@ import MediaQuery from 'react-mqls';
 import Title from './Title';
 import { CSSMapper, IRoute } from '../types/utils';
 import Events from '../utils/Events';
-import Menus from './Menus';
 import Dialog from '../components/Dialog';
 import Search from './Search';
 
@@ -16,6 +15,7 @@ const styles: CSSMapper = {
     },
     header: {
         padding: 0,
+        boxShadow: '0px 0px 10px -2px rgba(0, 0, 0, 0.75)',
     },
     content: {
         overflow: 'auto',
@@ -37,7 +37,7 @@ class Container extends Component<IProps, IState> {
 
     componentDidMount() {
         this.initBrowserRefresh();
-        Events.on('menucollapse', () => {
+        Events.on('searchcollapse', () => {
             this.setState({
                 collapsed: !this.state.collapsed,
             });
@@ -54,13 +54,19 @@ class Container extends Component<IProps, IState> {
         };
     }
 
+    handleCancel = () => {
+        this.setState({
+            collapsed: false,
+        });
+    }
+
     render() {
-        const { children } = this.props;
+        const { children, location, history, match } = this.props;
         const { collapsed } = this.state;
         return (
             <Layout style={{ height: '100%' }}>
                 <Layout.Header style={{ ...styles.theme, ...styles.header }}>
-                    <Title />
+                    <Title location={location} history={history} match={match} />
                 </Layout.Header>
                 <Layout.Content style={styles.content}>
                     {children}
@@ -72,13 +78,13 @@ class Container extends Component<IProps, IState> {
                             component: (
                                 <Dialog
                                     visible={collapsed}
-                                    closable={false}
                                     width="50%"
+                                    onCancel={this.handleCancel}
                                     contentStyle={{ padding: 0 }}
-                                    titleStyle={{ display: 'none' }}
+                                    titleStyle={{ backgroundColor: '#fff', width: '100%'  }}
                                     footerStyle={{ display: 'none' }}
                                 >
-                                    <Search />
+                                    <Search location={location} history={history} match={match} />
                                 </Dialog>
                             ),
                         },
@@ -87,13 +93,13 @@ class Container extends Component<IProps, IState> {
                             component: (
                                 <Dialog
                                     visible={collapsed}
-                                    closable={false}
                                     width="75%"
+                                    onCancel={this.handleCancel}
                                     contentStyle={{ padding: 0 }}
-                                    titleStyle={{ display: 'none' }}
+                                    titleStyle={{ backgroundColor: '#fff' }}
                                     footerStyle={{ display: 'none' }}
                                 >
-                                    <Search />
+                                    <Search location={location} history={history} match={match} />
                                 </Dialog>
                             ),
                         }

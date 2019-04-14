@@ -5,7 +5,7 @@
 		"title": "salgum1114의 개발 일지",
 		"author": "salgum1114",
 		"date": "2019-04-09 14:34",
-		"tags": "blog, start",
+		"tags": "css",
 		"cover": "/images/covers/css.png"
 	},
 	"/posts/fabricjs/2019-04-09-fabricjs": {
@@ -14,7 +14,7 @@
 		"title": "salgum1114의 개발 일지",
 		"author": "salgum1114",
 		"date": "2019-04-09 14:34",
-		"tags": "blog, start",
+		"tags": "fabricjs",
 		"cover": "/images/covers/js.png"
 	},
 	"/posts/reactjs/2019-04-09-reactjs": {
@@ -23,7 +23,7 @@
 		"title": "salgum1114의 개발 일지",
 		"author": "salgum1114",
 		"date": "2019-04-09 14:34",
-		"tags": "blog, start",
+		"tags": "react",
 		"cover": "/images/covers/react.png"
 	},
 	"/posts/reactjs/2019-04-10-reactjs": {
@@ -32,7 +32,7 @@
 		"title": "salgum1114의 개발 일지",
 		"author": "salgum1114",
 		"date": "2019-04-09 14:34",
-		"tags": "blog, start",
+		"tags": "react",
 		"cover": "/images/covers/react.png"
 	},
 	"/posts/reactjs/2019-04-11-reactjs": {
@@ -41,7 +41,7 @@
 		"title": "salgum1114의 개발 일지",
 		"author": "salgum1114",
 		"date": "2019-04-09 14:34",
-		"tags": "blog, start",
+		"tags": "reactjs",
 		"cover": "/images/covers/react.png"
 	}
 }

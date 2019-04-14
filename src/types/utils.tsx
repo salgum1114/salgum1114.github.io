@@ -4,7 +4,9 @@ export interface CSSMapper {
     [key: string]: React.CSSProperties;
 };
 
-export type EventType = 'menucollapse';
+export type EventType = 'menucollapse'
+| 'searchcollapse'
+;
 
 export interface IPayload<Payload extends { [K in keyof Payload]?: any } = {}> {
     type: string;

@@ -5,16 +5,23 @@ import { connect } from 'react-redux';
 import { Col, Card, Avatar } from 'antd';
 import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
+import Masonry from '../components/masonry';
 
 import { CSSMapper } from '../types/utils';
-import EmptyPage from '../components/EmptyPage';
 import { IReducer } from '../reducers';
+import EmptyPage from '../components/EmptyPage';
 import { IPost } from '../types/post';
 import { IAuthor } from '../types/author';
+import { ITag } from '../types/tag';
 
 interface IProps extends RouteChildrenProps {
     metadatas: Record<string, IPost>;
     authors: Record<string, IAuthor>;
+    tags: Record<string, ITag>;
+}
+
+interface IState {
+    metadatas: Record<string, IPost>;
 }
 
 const styles: CSSMapper = {
@@ -58,49 +65,103 @@ const styles: CSSMapper = {
     },
 }
 
-class Posts extends Component<IProps> {
+class Posts extends Component<IProps, IState> {
+    state = {
+        metadatas: this.props.metadatas,
+    }
+
     componentDidMount() {
+        const { tags, metadatas, location } = this.props;
+        this.getMetadatas(location.search, tags, metadatas);
         document.querySelector('.ant-layout-content').scrollTo(0, 0);
     }
 
+    componentWillReceiveProps(nextProps: IProps) {
+        const { tags, metadatas, location } = nextProps;
+        if (location.search && location.search.length && !isEmpty(tags)) {
+            this.getMetadatas(nextProps.location.search, tags, metadatas);
+        } else {
+            this.setState({
+                metadatas,
+            });
+        }
+    }
+
+    getMetadatas = (searchParams: string, tags: Record<string, ITag>, metadatas: Record<string, IPost>) => {
+        const params = new URLSearchParams(searchParams);
+        const tag = tags[params.get('tag')];
+        const search = params.get('search');
+        if (tag) {
+            const { paths } = tag;
+            const filteredMetadatas = paths.reduce((prev, curr) => {
+                return Object.assign(prev, { [curr]: metadatas[curr] });
+            }, {});
+            this.setState({
+                metadatas: filteredMetadatas,
+            });
+        } else if(search) {
+            const filteredMetadatas = Object.keys(metadatas).reduce((prev, curr) => {
+                const metadata = metadatas[curr];
+                if (metadata.title.includes(search)
+                || metadata.preview.includes(search)
+                || metadata.tags.includes(search)) {
+                    return Object.assign(prev, { [curr]: metadata });
+                }
+                return prev;
+            }, {});
+            this.setState({
+                metadatas: filteredMetadatas,
+            });
+        } else {
+            this.setState({
+                metadatas,
+            });
+        }
+    }
+
     renderCard = () => {
-        const { metadatas, history, location, authors } = this.props;
-        return !isEmpty(metadatas) ? (
-            Object.keys(metadatas).map(key => {
-                const metadata = metadatas[key];
-                const author = authors[metadata.author];
-                return (
-                    <Col key={key} className="container-col" xs={24} md={24} lg={12} xl={8} xxl={6}>
-                        <Card
-                            hoverable={true}
-                            onClick={() => {
-                                const pathname = key;
-                                location.pathname = pathname;
-                                history.push(pathname);
-                            }}
-                            cover={
-                                <Link style={styles.cardCover} to={key}>
-                                    <img
-                                        style={styles.cardThumbnail}
-                                        alt="logo"
-                                        src={metadata.cover || 'https://cdn.shopify.com/s/files/1/1380/9193/t/3/assets/no-image.svg?2375582141201571545'}
+        const { history, location, authors } = this.props;
+        const { metadatas } = this.state;
+        return !isEmpty(metadatas) && !isEmpty(authors) ? (
+            <Masonry.Box>
+                {
+                    Object.keys(metadatas).map(key => {
+                        const metadata = metadatas[key];
+                        const author = authors[metadata.author];
+                        return (
+                            <Masonry.Item key={key} className="container-col" col="3">
+                                <Card
+                                    hoverable={true}
+                                    onClick={() => {
+                                        const pathname = key;
+                                        location.pathname = pathname;
+                                        history.push(pathname);
+                                    }}
+                                    cover={
+                                        <Link style={styles.cardCover} to={key}>
+                                            <img
+                                                style={styles.cardThumbnail}
+                                                alt="logo"
+                                                src={metadata.cover || 'https://cdn.shopify.com/s/files/1/1380/9193/t/3/assets/no-image.svg?2375582141201571545'}
+                                            />
+                                        </Link>
+                                    }
+                                    bodyStyle={styles.cardBody}
+                                >
+                                    <Card.Meta
+                                        avatar={<Avatar src={author.avatar}>{author.name.charAt(0).toUpperCase()}</Avatar>}
+                                        title={metadata.title.length > 30 ? metadata.title.substring(0, 30).concat('...') : metadata.title}
+                                        description={moment(metadata.date).fromNow()}
                                     />
-                                </Link>
-                            }
-                            bodyStyle={styles.cardBody}
-                        >
-                            <Card.Meta
-                                avatar={<Avatar src={author.avatar}>{author.name.charAt(0).toUpperCase()}</Avatar>}
-                                title={metadata.title.length > 30 ? metadata.title.substring(0, 30).concat('...') : metadata.title}
-                                description={moment(metadata.date).fromNow()}
-                            />
-                            <div style={styles.cardPreview}>
-                                {metadata.preview}
-                            </div>
-                        </Card>
-                    </Col>
-                );
-            })
+                                    <div style={styles.cardPreview}>
+                                        {metadata.preview}
+                                    </div>
+                                </Card>
+                            </Masonry.Item>
+                        );
+                    })
+                }
+            </Masonry.Box>
         ) : <EmptyPage />;
     }
 
@@ -116,6 +177,7 @@ class Posts extends Component<IProps> {
 const mapSateToProps = (state: IReducer) => ({
     metadatas: state.posts.metadatas,
     authors: state.authors.authors,
+    tags: state.tags.tags,
 });
 
 export default connect(mapSateToProps)(Posts);

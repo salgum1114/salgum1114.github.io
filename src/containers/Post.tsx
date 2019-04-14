@@ -72,6 +72,12 @@ class Post extends Component<IProps, IState> {
         }
     }
 
+    handleClickTag = (e: any) => {
+        const tag = e.target.textContent;
+        this.props.history.push(`/posts?tag=${tag}`);
+        this.props.location.pathname = `/posts?tag=${tag}`;
+    }
+
     render() {
         const { error, post, author } = this.state;
         return (
@@ -87,7 +93,7 @@ class Post extends Component<IProps, IState> {
                             <div className="blog-markdown" dangerouslySetInnerHTML={{ __html: post.content }} />
                             <div style={styles.tags}>
                                 <Icon type="tags" style={styles.tagsIcon} />
-                                <Tags tags={post.tags ? post.tags.trim().split(',') : []} />
+                                <Tags tags={post.tags ? post.tags.trim().split(',') : []} onClick={this.handleClickTag} />
                             </div>
                             <Divider />
                             <div style={styles.authorInfo}>

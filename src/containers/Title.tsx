@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
 
 import { CSSMapper } from '../types/utils';
 import Events from '../utils/Events';
+import { RouteChildrenProps } from 'react-router';
 
 const styles: CSSMapper = {
     container: {
@@ -26,37 +26,25 @@ const styles: CSSMapper = {
     },
 };
 
-interface IState {
-    collapsed: boolean;
-}
-
-class Title extends Component<{}, IState> {
-    state: IState = {
-        collapsed: true,
+class Title extends Component<RouteChildrenProps> {
+    handleSearch = () => {
+        Events.emit('searchcollapse');
     }
 
-    componentDidMount() {
-        Events.on('menucollapse', () => {
-            this.setState({
-                collapsed: !this.state.collapsed,
-            });
-        });
-    }
-
-    handleCollapse = () => {
-        Events.emit('menucollapse');
+    handlePosts = () => {
+        const { history, location } = this.props;
+        history.push('/posts');
+        location.pathname = '/posts';
     }
 
     render() {
         return (
             <div style={styles.container}>
                 <div style={styles.menuCollapse}>
-                    <Link to="/posts">
-                        <Icon style={{ fontSize: '1.25rem' }} type="bars" />
-                    </Link>
+                    <Icon style={{ fontSize: '1.25rem' }} type="bars" onClick={this.handlePosts} />
                 </div>
                 <div style={styles.search}>
-                    <Icon style={{ fontSize: '1.25rem' }} type="search" onClick={this.handleCollapse} />
+                    <Icon style={{ fontSize: '1.25rem' }} type="search" onClick={this.handleSearch} />
                 </div>
             </div>
         );

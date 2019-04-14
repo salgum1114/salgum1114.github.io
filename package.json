@@ -58,6 +58,7 @@
     "react-hot-loader": "4.3.3",
     "react-json-view": "^1.19.1",
     "react-markdown": "^4.0.6",
+    "react-masonry-component": "^6.2.1",
     "react-mqls": "^0.1.8",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",

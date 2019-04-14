@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Tag } from 'antd';
 
 interface IProps {
     tags: string[];
     style?: React.CSSProperties;
+    tagStyle?: React.CSSProperties;
+    onClick?: React.MouseEventHandler;
 }
 
 class Tags extends Component<IProps> {
-    static propTypes = {
-        style: PropTypes.object,
-        tagStyle: PropTypes.object,
-        tags: PropTypes.arrayOf(PropTypes.string),
-    }
-
     static defaultProps: IProps = {
         tags: [],
     }
