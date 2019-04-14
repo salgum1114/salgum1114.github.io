@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { CSSMapper } from '../types/utils';
 import { metadataService } from '../services';
-import { ITags, ITag } from '../types/tag';
+import { ITags } from '../types/tag';
 import { TagActions } from '../actions/tags';
 
 interface IProps extends RouteChildrenProps {

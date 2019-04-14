@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RouteChildrenProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Col, Card, Avatar } from 'antd';
+import { Card, Avatar } from 'antd';
 import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
 import Masonry from '../components/masonry';
