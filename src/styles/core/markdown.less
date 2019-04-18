@@ -1,69 +1,25 @@
 .@{markdown-prefix-cls} {
     display: block;
     width: inherit;
-    code {
-        background-color: #f8f8f8;
-        border-color: #dfdfdf;
-        border-style: solid;
-        border-width: 1px;
-        color: #333;
-        font-family: Consolas,"Liberation Mono",Courier,monospace;
-        font-weight: normal;
-        padding: 0.125rem 0.3125rem 0.0625rem;
-    }
     img {
         display: block;
         margin-left: auto;
         margin-right: auto;
-    }
-    p {
-        font-family: inherit;
-        font-size: 1rem;
-        font-weight: normal;
-        line-height: 1.6;
-        margin-bottom: 1.25rem;
-        text-rendering: optimizeLegibility;
-        word-break: break-word;
+        background-color: transparent;
+        max-width: 100%;
     }
     pre {
-        word-wrap: break-word;
-        background-color: #f8f8f8;
-        border: 1px solid #dfdfdf;
-        margin-top: 1.5em;
-        margin-bottom: 1.5em;
-        padding: 0.125rem 0.3125rem 0.0625rem;
-        code {
-            display: block;
-            overflow-x: auto;
-            padding: 0.5em;
-            color: #333;
-            background: #f8f8f8;
-        }
+        color: rgb(255, 255, 255);
+        tab-size: 1.5em;
+        background: rgb(40, 44, 52);
+        border-radius: 10px;
+        overflow: auto;
     }
-    ul {
-        margin-left: 1.25rem;
-        font-family: inherit;
-        font-size: 1rem;
-        line-height: 1.6;
-        list-style-position: outside;
-        margin-bottom: 1.25rem;
-        code {
-            background-color: #f8f8f8;
-            border-color: #dfdfdf;
-            border-style: solid;
-            border-width: 1px;
-            color: #333;
-            font-family: Consolas,"Liberation Mono",Courier,monospace;
-            font-weight: normal;
-            padding: 0.125rem 0.3125rem 0.0625rem;
-        }
-    }
-}
-
-@media screen and (max-width: 575px) {
-    .@{markdown-prefix-cls} {
-        img {
-            width: 100%;
-        }
+    blockquote { 
+        background-color: rgba(255,229,100,0.3);
+        border-left-color: #ffe564;
+        border-left-width: 9px;
+        border-left-style: solid;
+        padding: 20px 45px 20px 26px;
     }
 }

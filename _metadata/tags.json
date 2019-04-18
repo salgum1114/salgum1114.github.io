@@ -6,9 +6,11 @@
 		]
 	},
 	"fabricjs": {
-		"total": 1,
+		"total": 3,
 		"paths": [
-			"/posts/fabricjs/2019-04-09-fabricjs"
+			"/posts/css/2019-04-10-css",
+			"/posts/fabricjs/2019-04-09-fabricjs",
+			"/posts/fabricjs/2019-04-16-fabricjs"
 		]
 	},
 	"react": {

@@ -8,9 +8,27 @@
 		"tags": "css",
 		"cover": "/images/covers/css.png"
 	},
+	"/posts/css/2019-04-10-css": {
+		"path": "/posts/css/2019-04-10-css",
+		"preview": "SHOWDOWN-HIGHLIGHT\n \n\n>  A Showdown extension for highlight the code blocks.\n\n\nThis package uses hig...",
+		"title": "salgum1114의 개발 일지",
+		"author": "salgum1114",
+		"date": "2019-04-09 14:34",
+		"tags": "fabricjs",
+		"cover": "/images/covers/js.png"
+	},
 	"/posts/fabricjs/2019-04-09-fabricjs": {
 		"path": "/posts/fabricjs/2019-04-09-fabricjs",
-		"preview": "asdfhasbdfasbfasfjasbasfajrne2jk321n421jj12412jn12n814hf81nf1hf11fhf71h87f13f413fh137fh13f1f8173h13h...",
+		"preview": "SHOWDOWN-HIGHLIGHT\n \n\n>  A Showdown extension for highlight the code blocks.\n\n\nThis package uses hig...",
+		"title": "salgum1114의 개발 일지",
+		"author": "salgum1114",
+		"date": "2019-04-09 14:34",
+		"tags": "fabricjs",
+		"cover": "/images/covers/js.png"
+	},
+	"/posts/fabricjs/2019-04-16-fabricjs": {
+		"path": "/posts/fabricjs/2019-04-16-fabricjs",
+		"preview": "SHOWDOWN-HIGHLIGHT\n \n\n>  A Showdown extension for highlight the code blocks.\n\n\nThis package uses hig...",
 		"title": "salgum1114의 개발 일지",
 		"author": "salgum1114",
 		"date": "2019-04-09 14:34",

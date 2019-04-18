@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import { Card, Avatar } from 'antd';
 import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
-import Masonry from '../components/masonry';
+import throttle from 'lodash/throttle';
+import localStorage from 'store/storages/localStorage';
 
+import Masonry from '../components/masonry';
 import { CSSMapper } from '../types/utils';
 import { IReducer } from '../reducers';
 import EmptyPage from '../components/EmptyPage';
@@ -71,9 +73,12 @@ class Posts extends Component<IProps, IState> {
     }
 
     componentDidMount() {
+        this.attachEvents();
+        const postsScroll = localStorage.read('postsScroll');
+        const scrollTop = postsScroll ? parseInt(postsScroll, 10) : 0;
+        document.querySelector('.ant-layout-content').scrollTo(0, scrollTop);
         const { tags, metadatas, location } = this.props;
         this.getMetadatas(location.search, tags, metadatas);
-        document.querySelector('.ant-layout-content').scrollTo(0, 0);
     }
 
     componentWillReceiveProps(nextProps: IProps) {
@@ -85,6 +90,22 @@ class Posts extends Component<IProps, IState> {
                 metadatas,
             });
         }
+    }
+
+    componentWillUnmount() {
+        this.detachEvents()
+    }
+
+    onScroll = throttle((e) => {
+        localStorage.write('postsScroll', e.target.scrollTop);
+    }, 300)
+
+    attachEvents = () => {
+        document.querySelector('.ant-layout-content').addEventListener('scroll', this.onScroll);
+    }
+
+    detachEvents = () => {
+        document.querySelector('.ant-layout-content').removeEventListener('scroll', this.onScroll);
     }
 
     getMetadatas = (searchParams: string, tags: Record<string, ITag>, metadatas: Record<string, IPost>) => {
@@ -141,8 +162,8 @@ class Posts extends Component<IProps, IState> {
                                         <Link style={styles.cardCover} to={key}>
                                             <img
                                                 style={styles.cardThumbnail}
-                                                alt="logo"
-                                                src={metadata.cover || 'https://cdn.shopify.com/s/files/1/1380/9193/t/3/assets/no-image.svg?2375582141201571545'}
+                                                alt="Post cover"
+                                                src={metadata.cover || '/images/default/no-image.svg'}
                                             />
                                         </Link>
                                     }

@@ -90,7 +90,7 @@ class Post extends Component<IProps, IState> {
                             <h1 style={styles.title}>{post.title}</h1>
                             <div style={styles.createdTime}>{moment(post.date).fromNow()}</div>
                             <Divider />
-                            <div className="blog-markdown" dangerouslySetInnerHTML={{ __html: post.content }} />
+                            <div className="markdown-body" dangerouslySetInnerHTML={{ __html: post.content }} />
                             <div style={styles.tags}>
                                 <Icon type="tags" style={styles.tagsIcon} />
                                 <Tags tags={post.tags ? post.tags.trim().split(',') : []} onClick={this.handleClickTag} />

@@ -31,6 +31,9 @@ const styles: CSSMapper = {
         margin: 16,
         flex: 1,
     },
+    tag: {
+        margin: 8,
+    },
 }
 
 class Search extends Component<IProps, IState> {
@@ -90,7 +93,7 @@ class Search extends Component<IProps, IState> {
                         Object.keys(tags).map(key => {
                             const tag = tags[key];
                             return (
-                                <Tag key={key} onClick={() => this.handleClick(key)}>{`${key} (${tag.total})`}</Tag>
+                                <Tag key={key} style={styles.tag} onClick={() => this.handleClick(key)}>{`${key} (${tag.total})`}</Tag>
                             );
                         })
                     }

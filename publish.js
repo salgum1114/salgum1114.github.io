@@ -1,6 +1,7 @@
 const fs = require('fs');
 const htmlToText = require('html-to-text');
 const showdown = require('showdown');
+const showdownHighlight = require('showdown-highlight');
 
 const postPath = './_posts';
 const encoding = 'UTF-8';
@@ -27,7 +28,11 @@ const metadatas = {};
 const posts = {};
 const tags = {};
 
-const converter = new showdown.Converter();
+const converter = new showdown.Converter({
+    emoji: true,
+    tables: true,
+    extensions: [showdownHighlight],
+});
 
 filePath.forEach((path) => {
     const file = fs.readFileSync(path, {
