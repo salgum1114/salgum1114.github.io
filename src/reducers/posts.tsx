@@ -21,6 +21,8 @@ export default function posts(state = initialState, action: IPayload<{ data?: an
             return updateReducer(state, 'INIT', { posts: action.payload }, 'SET');
         case PostTypes.SET_METADATA:
             return updateReducer(state, 'INIT', { metadatas: action.payload }, 'SET');
+        case PostTypes.SET_POST:
+            return updateReducer(state, 'INIT', { post: action.payload }, 'SET');
         default:
             return state;
     }

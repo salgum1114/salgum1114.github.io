@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { RouteChildrenProps } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Card, Avatar } from 'antd';
 import moment from 'moment';
@@ -15,11 +16,13 @@ import EmptyPage from '../components/EmptyPage';
 import { IPost } from '../types/post';
 import { IAuthor } from '../types/author';
 import { ITag } from '../types/tag';
+import { PostActions } from '../actions/posts';
 
 interface IProps extends RouteChildrenProps {
     metadatas: Record<string, IPost>;
     authors: Record<string, IAuthor>;
     tags: Record<string, ITag>;
+    setPost?: (args?: any) => void;
 }
 
 interface IState {
@@ -141,7 +144,7 @@ class Posts extends Component<IProps, IState> {
     }
 
     renderCard = () => {
-        const { history, location, authors } = this.props;
+        const { history, location, authors, setPost } = this.props;
         const { metadatas } = this.state;
         return !isEmpty(metadatas) && !isEmpty(authors) ? (
             <Masonry.Box>
@@ -154,6 +157,7 @@ class Posts extends Component<IProps, IState> {
                                 <Card
                                     hoverable={true}
                                     onClick={() => {
+                                        setPost(metadata);
                                         const pathname = key;
                                         location.pathname = pathname;
                                         history.push(pathname);
@@ -201,4 +205,8 @@ const mapSateToProps = (state: IReducer) => ({
     tags: state.tags.tags,
 });
 
-export default connect(mapSateToProps)(Posts);
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
+    setPost: PostActions.setPost,
+}, dispatch);
+
+export default connect(mapSateToProps, mapDispatchToProps)(Posts);
