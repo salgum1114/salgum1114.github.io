@@ -101,7 +101,7 @@ class Posts extends Component<IProps, IState> {
 
     onScroll = throttle((e) => {
         localStorage.write('postsScroll', e.target.scrollTop);
-    }, 300)
+    }, 100)
 
     attachEvents = () => {
         document.querySelector('.ant-layout-content').addEventListener('scroll', this.onScroll);
@@ -143,8 +143,26 @@ class Posts extends Component<IProps, IState> {
         }
     }
 
+    handleClick = (metadata: IPost) => {
+        const { location, history, setPost } = this.props;
+        const postHistory = JSON.parse(localStorage.read('postHistory')) || [];
+        const findIndex = postHistory.findIndex((value: any) => value.path === metadata.path);
+        if (findIndex >= 0) {
+            postHistory.splice(findIndex, 1);
+        }
+        postHistory.unshift({
+            path: metadata.path,
+            title: metadata.title,
+        });
+        localStorage.write('postHistory', JSON.stringify(postHistory));
+        setPost(metadata);
+        const pathname = metadata.path;
+        location.pathname = pathname;
+        history.push(pathname);
+    }
+
     renderCard = () => {
-        const { history, location, authors, setPost } = this.props;
+        const { authors } = this.props;
         const { metadatas } = this.state;
         return !isEmpty(metadatas) && !isEmpty(authors) ? (
             <Masonry.Box>
@@ -156,12 +174,7 @@ class Posts extends Component<IProps, IState> {
                             <Masonry.Item key={key} className="container-col" col="3">
                                 <Card
                                     hoverable={true}
-                                    onClick={() => {
-                                        setPost(metadata);
-                                        const pathname = key;
-                                        location.pathname = pathname;
-                                        history.push(pathname);
-                                    }}
+                                    onClick={() => this.handleClick(metadata)}
                                     cover={
                                         <Link style={styles.cardCover} to={key}>
                                             <img

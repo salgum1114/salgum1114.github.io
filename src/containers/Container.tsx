@@ -84,7 +84,7 @@ class Container extends Component<IProps, IState> {
                                     titleStyle={{ backgroundColor: '#fff', width: '100%'  }}
                                     footerStyle={{ display: 'none' }}
                                 >
-                                    <Search location={location} history={history} match={match} />
+                                    <Search onCancel={this.handleCancel} location={location} history={history} match={match} />
                                 </Dialog>
                             ),
                         },
@@ -93,13 +93,15 @@ class Container extends Component<IProps, IState> {
                             component: (
                                 <Dialog
                                     visible={collapsed}
-                                    width="75%"
+                                    width="100%"
+                                    closable={false}
                                     onCancel={this.handleCancel}
+                                    style={{ maxWidth: '100%' }}
                                     contentStyle={{ padding: 0 }}
-                                    titleStyle={{ backgroundColor: '#fff' }}
+                                    titleStyle={{ backgroundColor: '#fff', padding: 0 }}
                                     footerStyle={{ display: 'none' }}
                                 >
-                                    <Search location={location} history={history} match={match} />
+                                    <Search onCancel={this.handleCancel} location={location} history={history} match={match} />
                                 </Dialog>
                             ),
                         }
