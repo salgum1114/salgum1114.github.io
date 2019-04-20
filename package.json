@@ -9,7 +9,7 @@
     "start": "npm install && npm run start:dev",
     "start:dev": "webpack-dev-server --config webpack.dev.js --inline",
     "deploy": "npm install && npm run build && node publish",
-    "metadata": "node publish",
+    "generate": "node generator",
     "lint": "tslint '**/*.ts'"
   },
   "repository": {

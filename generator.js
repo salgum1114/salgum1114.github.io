@@ -5,6 +5,7 @@ const showdownHighlight = require('showdown-highlight');
 
 const postPath = './_posts';
 const encoding = 'UTF-8';
+const sitemapPath = './sitemap.xml';
 const metadataPath = './_metadata/metadata.json';
 const tagsPath = './_metadata/tags.json';
 const postsPath = './_metadata/posts.json';
@@ -91,6 +92,35 @@ filePath.forEach((path) => {
     Object.assign(metadatas, { [newPath]: metadata });
     Object.assign(posts, { [newPath]: post });
 });
+
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+    ${Object.keys(metadatas).reduce((prev, curr, index) => {
+        if (index === 0) {
+            return prev.concat(
+    `<url>
+        <loc>https://salgum1114.github.io${curr}</loc>
+        <lastmod>${metadatas[curr].date}</lastmod>
+    </url>\r\n`
+            );
+        } else if (index === Object.keys(metadatas).length - 1) {
+            return prev.concat(
+        `    <url>
+        <loc>https://salgum1114.github.io${curr}</loc>
+        <lastmod>${metadatas[curr].date}</lastmod>
+    </url>`
+            );
+        }
+        return prev.concat(
+    `    <url>
+        <loc>https://salgum1114.github.io${curr}</loc>
+        <lastmod>${metadatas[curr].date}</lastmod>
+    </url>\r\n`
+        );
+    }, '')}
+</urlset>`;
+
+fs.writeFileSync(sitemapPath, sitemapXml);
 
 fs.writeFileSync(metadataPath, JSON.stringify(metadatas, null, '\t'), {
     encoding: 'UTF-8',
