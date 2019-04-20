@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
 import { Divider, Icon } from 'antd';
 import { RouteChildrenProps } from 'react-router';
 import moment from 'moment';
@@ -13,11 +14,13 @@ import Tags from '../components/Tags';
 import Comments from '../components/Comments';
 import AuthorInfo from '../components/AuthorInfo';
 import { IAuthor } from '../types/author';
+import { PostActions } from '../actions/posts';
 
 interface IProps extends RouteChildrenProps {
     id: string;
     posts: Record<string, IPost>;
     authors: Record<string, IAuthor>;
+    setPost?: (args?: any) => void;
 }
 
 interface IState {
@@ -29,8 +32,23 @@ interface IState {
 const styles: CSSMapper = {
     container: { display: 'flex', justifyContent: 'center' },
     viewContainer: { maxWidth: 992, flex: 1, width: 'inherit' },
-    title: { fontSize: '2.5em', lineHeight: '3.2rem', wordBreak: 'break-word' },
-    createdTime: { fontSize: '1.125em', color: '#868e96', margin: '16px 0' },
+    postHeader: {
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '20rem',
+        marginBottom: '2rem',
+    },
+    postCover: {
+        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+    },
+    title: { fontSize: '2.5em', marginBottom: '2rem', lineHeight: '3.2rem', wordBreak: 'break-word', color: '#fff' },
+    createdTime: { fontSize: '1.125em', color: '#ffffffc2' },
     authorInfo: { margin: '32px 0 32px 0' },
     tags: { display: 'flex', alignItems: 'center', margin: '64px 0 32px 0' },
     tagsIcon: { fontSize: 18, marginRight: 16 },
@@ -54,6 +72,10 @@ class Post extends Component<IProps, IState> {
         this.getPost(location, posts, authors);
     }
 
+    componentWillUnmount() {
+        this.props.setPost({});
+    }
+
     getPost = (location: any, posts: Record<string, IPost>, authors: Record<string, IAuthor>) => {
         const post = posts[location.pathname];
         if (post) {
@@ -61,6 +83,8 @@ class Post extends Component<IProps, IState> {
             this.setState({
                 post,
                 author,
+            }, () => {
+                this.props.setPost(post);
             });
         } else {
             if (!isEmpty(posts)) {
@@ -87,9 +111,15 @@ class Post extends Component<IProps, IState> {
                         <ErrorPage status={404} />
                     ) : (
                         <div style={styles.viewContainer}>
-                            <h1 style={styles.title}>{post.title}</h1>
-                            <div style={styles.createdTime}>{moment(post.date).fromNow()}</div>
-                            <Divider />
+                            <div className="post-header" style={{ ...styles.postHeader, backgroundImage: `url(${post.cover || '/images/default/no-image.svg'})` }}>
+                                <div style={styles.postCover}>
+                                    <h1 className="post-title" style={styles.title}>
+                                        {post.title}
+                                    </h1>
+                                    <div style={styles.createdTime}>{moment(post.date).fromNow()}</div>
+                                </div>
+                            </div>
+                            {/* <Divider /> */}
                             <div className="markdown-body" dangerouslySetInnerHTML={{ __html: post.content }} />
                             <div style={styles.tags}>
                                 <Icon type="tags" style={styles.tagsIcon} />
@@ -114,4 +144,8 @@ const mapStateToProps = (state: IReducer) => ({
     authors: state.authors.authors,
 });
 
-export default connect(mapStateToProps)(Post);
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
+    setPost: PostActions.setPost,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
