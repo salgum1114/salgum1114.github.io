@@ -240,7 +240,6 @@ class Search extends Component<IProps, IState> {
                                         prefix={<Icon type="arrow-left" onClick={onCancel} />}
                                         onChange={this.handleChangeSearch}
                                         onSearch={this.handleSearch}
-                                        onPressEnter={(e: any) => this.handleSearch(e.target.value)}
                                         value={search}
                                         style={{ height: 48 }}
                                     />
