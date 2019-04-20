@@ -17,14 +17,18 @@ const getFiles = (dir, files = []) => {
         if (stat.isDirectory()) {
             getFiles(path, files);
         } else {
-            files.push(path);
+            files.push({
+                path,
+                stat,
+            });
         }
     });
     return files;
 };
 
-const filePath = getFiles(postPath);
+const files = getFiles(postPath);
 
+const sitemaps = [];
 const metadatas = {};
 const posts = {};
 const tags = {};
@@ -35,8 +39,8 @@ const converter = new showdown.Converter({
     extensions: [showdownHighlight],
 });
 
-filePath.forEach((path) => {
-    const file = fs.readFileSync(path, {
+files.forEach((f) => {
+    const file = fs.readFileSync(f.path, {
         encoding,
     });
     const metadataStr = file.split('---', 2)[1].trim();
@@ -49,7 +53,7 @@ filePath.forEach((path) => {
     if (preview && preview.length > 100) {
         preview = `${preview.substring(0, 100)}...`;
     }
-    const newPath = `/posts/${path.substring(9, path.length - 3)}`;
+    const newPath = `/posts/${f.path.substring(9, f.path.length - 3)}`;
     const metadata = {
         path: newPath,
         preview,
@@ -57,6 +61,10 @@ filePath.forEach((path) => {
     const post = {
         path: newPath,
         content: html,
+    };
+    const sitemap = {
+        path: newPath,
+        lastmod: f.stat.mtime,
     };
     metadataStr.split('\r\n').forEach((metaStr, index) => {
         if (index !== 0 || index !== metadataStr.length) {
@@ -89,32 +97,43 @@ filePath.forEach((path) => {
             }
         }
     });
+    sitemaps.push(sitemap);
     Object.assign(metadatas, { [newPath]: metadata });
     Object.assign(posts, { [newPath]: post });
 });
 
+const formatDate = (date) => {
+    const d = new Date(date);
+    let month = `${(d.getMonth() + 1)}`;
+    let day = `${d.getDate()}`;
+    const year = d.getFullYear();
+    if (month.length < 2) month = `0${month}`;
+    if (day.length < 2) day = `0 ${day}`;
+    return [year, month, day].join('-');
+};
+
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
-    ${Object.keys(metadatas).reduce((prev, curr, index) => {
+    ${sitemaps.reduce((prev, curr, index) => {
         if (index === 0) {
             return prev.concat(
     `<url>
-        <loc>https://salgum1114.github.io${curr}</loc>
-        <lastmod>${metadatas[curr].date}</lastmod>
+        <loc>https://salgum1114.github.io${curr.path}</loc>
+        <lastmod>${formatDate(curr.lastmod)}</lastmod>
     </url>\r\n`
             );
         } else if (index === Object.keys(metadatas).length - 1) {
             return prev.concat(
         `    <url>
-        <loc>https://salgum1114.github.io${curr}</loc>
-        <lastmod>${metadatas[curr].date}</lastmod>
+        <loc>https://salgum1114.github.io${curr.path}</loc>
+        <lastmod>${formatDate(curr.lastmod)}</lastmod>
     </url>`
             );
         }
         return prev.concat(
     `    <url>
-        <loc>https://salgum1114.github.io${curr}</loc>
-        <lastmod>${metadatas[curr].date}</lastmod>
+        <loc>https://salgum1114.github.io${curr.path}</loc>
+        <lastmod>${formatDate(curr.lastmod)}</lastmod>
     </url>\r\n`
         );
     }, '')}
