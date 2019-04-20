@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { Input, Tag, Icon } from 'antd';
 import { RouteChildrenProps } from 'react-router';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -67,6 +67,7 @@ const styles: CSSMapper = {
 }
 
 class Search extends Component<IProps, IState> {
+    private inputRef = createRef<typeof HTMLInputElement>();
     constructor(props: IProps) {
         super(props);
         let isMobile = false;
@@ -139,6 +140,7 @@ class Search extends Component<IProps, IState> {
             });
         }
         if (this.state.isMobile) {
+            this.inputRef.current.blur();
             this.props.onCancel();
         }
         this.setState({
@@ -237,6 +239,7 @@ class Search extends Component<IProps, IState> {
                             component: (
                                 <div style={{ margin: 8 }}>
                                     <Input.Search
+                                        ref={this.inputRef}
                                         prefix={<Icon type="arrow-left" onClick={onCancel} />}
                                         onChange={this.handleChangeSearch}
                                         onSearch={this.handleSearch}
