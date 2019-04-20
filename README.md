@@ -97,7 +97,7 @@ I have included `webpack-dev-server` for testing changes locally. It can be acce
 [nojekyll]: https://help.github.com/articles/files-that-start-with-an-underscore-are-missing/
 
 <!-- other links -->
-[liveExample]: http://spa-github-pages.rafrex.com
+[liveExample]: https://salgum1114.github.io/
 [react]: https://github.com/facebook/react
 [reactRouter]: https://github.com/ReactTraining/react-router
 [seoLand]: http://searchengineland.com/tested-googlebot-crawls-javascript-heres-learned-220157
