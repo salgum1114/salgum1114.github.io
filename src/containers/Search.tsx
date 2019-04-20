@@ -1,5 +1,5 @@
 import React, { Component, createRef, InputHTMLAttributes } from 'react';
-import { Input, Tag, Icon } from 'antd';
+import { Input, Tag, Icon, Tooltip } from 'antd';
 import { RouteChildrenProps } from 'react-router';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -273,7 +273,13 @@ class Search extends Component<IProps, IState> {
                             )
                         }, [])
                     }
-                    {searchHistory.length ? <a onClick={this.handleClearSearchHistory} style={styles.historyClear}>최근 검색 모두 지우기</a> : null}
+                    {
+                        searchHistory.length ? (
+                            <a onClick={this.handleClearSearchHistory} style={styles.historyClear}>최근 검색 모두 지우기</a>
+                        ) : (
+                            <div style={{ ...styles.historyClear, color: '#999999' }}>검색 기록이 없습니다</div>
+                        )
+                    }
                 </div>
                 <div style={styles.search}>
                     <h4>최근 기록</h4>
@@ -300,7 +306,13 @@ class Search extends Component<IProps, IState> {
                             )
                         }, [])
                     }
-                    {postHistory.length ? <a onClick={this.handleClearPostHistory} style={styles.historyClear}>최근 기록 모두 지우기</a> : null}
+                    {
+                        postHistory.length ? (
+                            <a onClick={this.handleClearPostHistory} style={styles.historyClear}>최근 기록 모두 지우기</a>
+                        ) : (
+                            <div style={{ ...styles.historyClear, color: '#999999' }}>읽은 기록이 없습니다</div>
+                        )
+                    }
                 </div>
                 <div style={styles.tags}>
                     <h4>전체 태그</h4>
