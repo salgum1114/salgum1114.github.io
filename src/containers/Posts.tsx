@@ -126,9 +126,9 @@ class Posts extends Component<IProps, IState> {
         } else if(search) {
             const filteredMetadatas = Object.keys(metadatas).reduce((prev, curr) => {
                 const metadata = metadatas[curr];
-                if (metadata.title.includes(search)
-                || metadata.preview.includes(search)
-                || metadata.tags.includes(search)) {
+                if (metadata.title.toLowerCase().indexOf(search.toLowerCase()) >= 0
+                || metadata.preview.toLowerCase().indexOf(search.toLowerCase()) >= 0
+                || metadata.tags.toLowerCase().indexOf(search.toLowerCase()) >= 0) {
                     return Object.assign(prev, { [curr]: metadata });
                 }
                 return prev;
