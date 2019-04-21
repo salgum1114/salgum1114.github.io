@@ -2,6 +2,7 @@ const fs = require('fs');
 const htmlToText = require('html-to-text');
 const showdown = require('showdown');
 const showdownHighlight = require('showdown-highlight');
+const sortBy = require('lodash/sortBy');
 
 const postPath = './_posts';
 const encoding = 'UTF-8';
@@ -141,7 +142,11 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 
 fs.writeFileSync(sitemapPath, sitemapXml);
 
-fs.writeFileSync(metadataPath, JSON.stringify(metadatas, null, '\t'), {
+const sortedMetadatas = sortBy(Object.values(metadatas), 'date').reverse().reduce((prev, curr) => {
+    return Object.assign(prev, { [curr.path]: curr });
+}, {});
+
+fs.writeFileSync(metadataPath, JSON.stringify(sortedMetadatas, null, '\t'), {
     encoding: 'UTF-8',
 });
 
