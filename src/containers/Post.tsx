@@ -47,7 +47,7 @@ const styles: CSSMapper = {
         width: '100%',
         height: '100%',
     },
-    title: { fontSize: '2.5em', marginBottom: '2rem', lineHeight: '3.2rem', wordBreak: 'break-word', color: '#fff' },
+    title: { fontSize: '2.5em', textAlign: 'center', marginBottom: '2rem', lineHeight: '3.2rem', wordBreak: 'break-word', color: '#fff' },
     createdTime: { fontSize: '1.125em', color: '#ffffffc2' },
     authorInfo: { margin: '32px 0 32px 0' },
     tags: { display: 'flex', alignItems: 'center', margin: '64px 0 32px 0' },
