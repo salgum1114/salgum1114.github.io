@@ -51,8 +51,8 @@ files.forEach((f) => {
         ignoreHref: true,
         ignoreImage: true,
     });
-    if (preview && preview.length > 100) {
-        preview = `${preview.substring(0, 100)}...`;
+    if (preview && preview.length > 200) {
+        preview = `${preview.substring(0, 200)}...`;
     }
     const newPath = `/posts/${f.path.substring(9, f.path.length - 3)}`;
     const metadata = {
