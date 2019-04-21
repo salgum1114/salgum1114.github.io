@@ -249,7 +249,12 @@ class Search extends Component<IProps, IState> {
                     padding: isMobile ? 0 : null,
                     width: isMobile ? null : '100%',
                 }}
-                footerStyle={{ display: 'none' }}
+                footerStyle={{ justifyContent: 'center' }}
+                footer={(
+                    <a href="https://github.com/salgum1114" target="_blank">
+                        <Icon style={{ fontSize: '1.25rem' }} type="github" />
+                    </a>
+                )}
             >
                 <div className="blog-search" style={styles.container}>
                     <MediaQuery

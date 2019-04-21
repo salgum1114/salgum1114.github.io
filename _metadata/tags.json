@@ -1,29 +1,20 @@
 {
-	"css": {
-		"total": 1,
-		"paths": [
-			"/posts/css/2019-04-09-css"
-		]
-	},
-	"fabricjs": {
-		"total": 3,
-		"paths": [
-			"/posts/css/2019-04-10-css",
-			"/posts/fabricjs/2019-04-09-fabricjs",
-			"/posts/fabricjs/2019-04-16-fabricjs"
-		]
-	},
-	"react": {
-		"total": 2,
-		"paths": [
-			"/posts/reactjs/2019-04-09-reactjs",
-			"/posts/reactjs/2019-04-10-reactjs"
-		]
-	},
 	"reactjs": {
 		"total": 1,
 		"paths": [
-			"/posts/reactjs/2019-04-11-reactjs"
+			"/posts/reactjs/2019-04-21-spa-for-github-pages"
+		]
+	},
+	"github": {
+		"total": 1,
+		"paths": [
+			"/posts/reactjs/2019-04-21-spa-for-github-pages"
+		]
+	},
+	"blog": {
+		"total": 1,
+		"paths": [
+			"/posts/reactjs/2019-04-21-spa-for-github-pages"
 		]
 	}
 }

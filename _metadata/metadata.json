@@ -1,65 +1,11 @@
 {
-	"/posts/css/2019-04-09-css": {
-		"path": "/posts/css/2019-04-09-css",
-		"preview": "\n\nShowdown is a Javascript Markdown to HTML converter, based on the original works\nby John Gruber. I...",
-		"title": "salgum1114의 개발 일지",
+	"/posts/reactjs/2019-04-21-spa-for-github-pages": {
+		"path": "/posts/reactjs/2019-04-21-spa-for-github-pages",
+		"preview": "SINGLE PAGE APPS FOR GITHUB PAGES\nLive example\n\nThis is a lightweight solution for deploying single ...",
+		"title": "Single Page Apps for Github Pages",
 		"author": "salgum1114",
-		"date": "2019-04-09 14:34",
-		"tags": "css",
-		"cover": "/images/covers/css.png"
-	},
-	"/posts/css/2019-04-10-css": {
-		"path": "/posts/css/2019-04-10-css",
-		"preview": "SHOWDOWN-HIGHLIGHT\n \n\n>  A Showdown extension for highlight the code blocks.\n\n\nThis package uses hig...",
-		"title": "salgum1114의 개발 일지",
-		"author": "salgum1114",
-		"date": "2019-04-09 14:34",
-		"tags": "fabricjs",
-		"cover": "/images/covers/js.png"
-	},
-	"/posts/fabricjs/2019-04-09-fabricjs": {
-		"path": "/posts/fabricjs/2019-04-09-fabricjs",
-		"preview": "SHOWDOWN-HIGHLIGHT\n \n\n>  A Showdown extension for highlight the code blocks.\n\n\nThis package uses hig...",
-		"title": "salgum1114의 개발 일지",
-		"author": "salgum1114",
-		"date": "2019-04-09 14:34",
-		"tags": "fabricjs",
-		"cover": "/images/covers/js.png"
-	},
-	"/posts/fabricjs/2019-04-16-fabricjs": {
-		"path": "/posts/fabricjs/2019-04-16-fabricjs",
-		"preview": "SHOWDOWN-HIGHLIGHT\n \n\n>  A Showdown extension for highlight the code blocks.\n\n\nThis package uses hig...",
-		"title": "salgum1114의 개발 일지",
-		"author": "salgum1114",
-		"date": "2019-04-09 14:34",
-		"tags": "fabricjs",
-		"cover": "/images/covers/js.png"
-	},
-	"/posts/reactjs/2019-04-09-reactjs": {
-		"path": "/posts/reactjs/2019-04-09-reactjs",
-		"preview": "SHOWDOWN-HIGHLIGHT\n \n\n>  A Showdown extension for highlight the code blocks.\n\n\nThis package uses hig...",
-		"title": "salgum1114의 개발 일지",
-		"author": "salgum1114",
-		"date": "2019-04-09 14:34",
-		"tags": "react",
-		"cover": "/images/default/ant-motion.jpg"
-	},
-	"/posts/reactjs/2019-04-10-reactjs": {
-		"path": "/posts/reactjs/2019-04-10-reactjs",
-		"preview": "\n\nShowdown is a Javascript Markdown to HTML converter, based on the original works\nby John Gruber. I...",
-		"title": "salgum1114의 개발 일지",
-		"author": "salgum1114",
-		"date": "2019-04-09 14:34",
-		"tags": "react",
-		"cover": "/images/covers/react.png"
-	},
-	"/posts/reactjs/2019-04-11-reactjs": {
-		"path": "/posts/reactjs/2019-04-11-reactjs",
-		"preview": "\n\nShowdown is a Javascript Markdown to HTML converter, based on the original works\nby John Gruber. I...",
-		"title": "salgum1114의 개발 일지",
-		"author": "salgum1114",
-		"date": "2019-04-09 14:34",
-		"tags": "reactjs",
+		"date": "2019-04-21 16:51",
+		"tags": "reactjs, github, blog",
 		"cover": "/images/covers/react.png"
 	}
 }
