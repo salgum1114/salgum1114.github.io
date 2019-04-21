@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Icon } from 'antd';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
+import throttle from 'lodash/throttle';
 
 import { CSSMapper } from '../types/utils';
 import Events from '../utils/Events';
@@ -48,6 +48,8 @@ const styles: CSSMapper = {
 };
 
 class Title extends Component<IProps, IState> {
+    private timeoutId: NodeJS.Timeout;
+
     state = {
         visible: false,
     }
@@ -81,11 +83,24 @@ class Title extends Component<IProps, IState> {
         }
     }
 
-    onScroll = (e: any) => {
+    onScroll = throttle((e: any) => {
         if (e.target.scrollTop >= 64) {
             if (this.props.location.pathname === '/posts') {
                 return;
             }
+            const content = document.querySelector('.blog-backtop');
+            if (content) {
+                content.classList.add('visible');
+            }
+            if (this.timeoutId) {
+                clearTimeout(this.timeoutId);
+            }
+            this.timeoutId = setTimeout(() => {
+                const content = document.querySelector('.blog-backtop');
+                if (content) {
+                    content.classList.remove('visible');
+                }
+            }, 1500);
             if (!this.state.visible) {
                 this.setState({
                     visible: true,
@@ -93,12 +108,16 @@ class Title extends Component<IProps, IState> {
             }
         } else {
             if (this.state.visible) {
+                const content = document.querySelector('.blog-backtop');
+                if (content) {
+                    content.classList.remove('visible');
+                }
                 this.setState({
                     visible: false,
                 });
             }
         }
-    }
+    }, 200)
 
     handleSearch = () => {
         Events.emit('searchcollapse');

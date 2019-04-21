@@ -15,6 +15,7 @@ import Comments from '../components/Comments';
 import AuthorInfo from '../components/AuthorInfo';
 import { IAuthor } from '../types/author';
 import { PostActions } from '../actions/posts';
+import BackTop from '../components/BackTop';
 
 interface IProps extends RouteChildrenProps {
     id: string;
@@ -131,6 +132,7 @@ class Post extends Component<IProps, IState> {
                             </div>
                             <Divider />
                             <Comments />
+                            <BackTop scrollStepInPx={100} delayInMs={10} />
                         </div>
                     )
                 }
