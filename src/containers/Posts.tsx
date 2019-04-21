@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Card, Avatar } from 'antd';
 import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
-import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 import localStorage from 'store/storages/localStorage';
 
 import Masonry from '../components/masonry';
@@ -99,7 +99,7 @@ class Posts extends Component<IProps, IState> {
         this.detachEvents()
     }
 
-    onScroll = throttle((e) => {
+    onScroll = debounce((e) => {
         localStorage.write('postsScroll', e.target.scrollTop);
     }, 100)
 
@@ -115,10 +115,11 @@ class Posts extends Component<IProps, IState> {
         const params = new URLSearchParams(searchParams);
         const tag = tags[params.get('tag')];
         const search = params.get('search');
-        if (tag) {
+        if (tag && !isEmpty(metadatas)) {
             const { paths } = tag;
             const filteredMetadatas = paths.reduce((prev, curr) => {
-                return Object.assign(prev, { [curr]: metadatas[curr] });
+                const metadata = metadatas[curr];
+                return Object.assign(prev, { [curr]: metadata });
             }, {});
             this.setState({
                 metadatas: filteredMetadatas,

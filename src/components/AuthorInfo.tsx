@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Avatar } from 'antd';
 import isEmpty from 'lodash/isEmpty';
-import { Link } from 'react-router-dom';
 
 import { IAuthor } from '../types/author';
 import { CSSMapper } from '../types/utils';
@@ -32,7 +31,7 @@ class AuthorInfo extends Component<IAuthorInfoProps> {
                     </Avatar>
                 </div>
                 <div>
-                    <Link to={`/account/${author.name}`}><span style={styles.title}>{author.title}</span></Link>
+                    <a href={`https://github.com/${author.name}`} target="_blank"><span style={styles.title}>{author.title}</span></a>
                     <div style={styles.description}>{author.bio}</div>
                 </div>
             </div>
