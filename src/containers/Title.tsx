@@ -36,7 +36,6 @@ const styles: CSSMapper = {
         flex: 1,
         color: '#000',
         fontWeight: 500,
-        fontSize: '1.25rem',
         whiteSpace: 'nowrap',
     },
     search: {
@@ -144,7 +143,7 @@ class Title extends Component<IProps, IState> {
                     <Icon style={{ fontSize: '1.25rem' }} type="bars" onClick={this.handlePosts} />
                 </div>
                 <div style={styles.title}>
-                    <div className={classname}>
+                    <div style={{ fontSize: '1.25rem' }} className={classname}>
                         {visible && post.title}
                     </div>
                     {!visible && (
