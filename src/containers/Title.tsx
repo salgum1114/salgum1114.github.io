@@ -143,7 +143,7 @@ class Title extends Component<IProps, IState> {
                     <Icon style={{ fontSize: '1.25rem' }} type="bars" onClick={this.handlePosts} />
                 </div>
                 <div style={styles.title}>
-                    <div style={{ fontSize: '1.25rem' }} className={classname}>
+                    <div className={classname}>
                         {visible && post.title}
                     </div>
                     {!visible && (
