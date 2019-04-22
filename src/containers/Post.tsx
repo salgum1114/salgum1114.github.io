@@ -40,7 +40,7 @@ const styles: CSSMapper = {
         marginBottom: '2rem',
     },
     postCover: {
-        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -50,6 +50,7 @@ const styles: CSSMapper = {
     },
     title: { fontSize: '2.5em', textAlign: 'center', marginBottom: '2rem', lineHeight: '3.2rem', wordBreak: 'break-word', color: '#fff' },
     createdTime: { fontSize: '1.125em', color: '#ffffffc2' },
+    createDate: { marginRight: 8 },
     authorInfo: { margin: '32px 0 32px 0' },
     tags: { display: 'flex', alignItems: 'center', margin: '64px 0 32px 0' },
     tagsIcon: { fontSize: 18, marginRight: 16 },
@@ -117,10 +118,12 @@ class Post extends Component<IProps, IState> {
                                     <h1 className="post-title" style={styles.title}>
                                         {post.title}
                                     </h1>
-                                    <div style={styles.createdTime}>{moment(post.date).fromNow()}</div>
+                                    <div style={styles.createdTime}>
+                                        <span style={styles.createDate}>{moment(post.date).format('YYYY-MM-DD HH:mm')}</span>
+                                        <span>{`(${moment(post.date).fromNow()})`}</span>
+                                    </div>
                                 </div>
                             </div>
-                            {/* <Divider /> */}
                             <div className="markdown-body" dangerouslySetInnerHTML={{ __html: post.content }} />
                             <div style={styles.tags}>
                                 <Icon type="tags" style={styles.tagsIcon} />

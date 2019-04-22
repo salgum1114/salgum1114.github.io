@@ -143,8 +143,15 @@ class Title extends Component<IProps, IState> {
                 <div style={styles.menuCollapse}>
                     <Icon style={{ fontSize: '1.25rem' }} type="bars" onClick={this.handlePosts} />
                 </div>
-                <div className={classname} style={styles.title}>
-                    {post.title}
+                <div style={styles.title}>
+                    <div className={classname}>
+                        {visible && post.title}
+                    </div>
+                    {!visible && (
+                        <a href="https://github.com/salgum1114" target="_blank">
+                            <Icon style={{ fontSize: '1.25rem' }} type="github" />
+                        </a>
+                    )}
                 </div>
                 <div style={styles.search}>
                     <Icon style={{ fontSize: '1.25rem' }} type="search" onClick={this.handleSearch} />

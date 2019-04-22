@@ -3,6 +3,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route, matchPath, withRouter, Redirect } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
+import moment from 'moment';
 
 import Container from './containers/Container';
 import { IRoute } from './types/utils';
@@ -13,6 +14,8 @@ import Tags from './containers/Tags';
 import { metadataService } from './services';
 import { PostActions } from './actions/posts';
 import { AuthorActions } from './actions/authors';
+
+moment.locale('ko');
 
 interface IProps {
     routes: IRoute[];

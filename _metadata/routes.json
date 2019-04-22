@@ -22,6 +22,10 @@
                 "layout": "post"
             },
             {
+                "path": "/posts/webpack/:id",
+                "layout": "post"
+            },
+            {
                 "path": "/posts/:id",
                 "layout": "post"
             }
