@@ -190,7 +190,7 @@ class Posts extends Component<IProps, IState> {
                                 >
                                     <Card.Meta
                                         avatar={<Avatar src={author.avatar}>{author.name.charAt(0).toUpperCase()}</Avatar>}
-                                        title={<h2 style={{ fontSize: 'inherit', color: 'inherit' }}>{metadata.title.length > 30 ? metadata.title.substring(0, 30).concat('...') : metadata.title}</h2>}
+                                        title={<h2 className="ant-card-meta-title">{metadata.title.length > 30 ? metadata.title.substring(0, 30).concat('...') : metadata.title}</h2>}
                                         description={moment(metadata.date).fromNow()}
                                     />
                                     <div style={styles.cardPreview}>
