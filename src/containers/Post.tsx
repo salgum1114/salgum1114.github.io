@@ -109,38 +109,40 @@ class Post extends Component<IProps, IState> {
         const { error, post, author } = this.state;
         return (
             <div className="container" style={styles.container}>
-                <Helmet
-                    title={post.title}
-                />
                 {
                     isEmpty(post) && error ? (
                         <ErrorPage status={404} />
                     ) : (
-                        <div style={styles.viewContainer}>
-                            <div className="post-header" style={{ ...styles.postHeader, backgroundImage: `url(${post.cover || '/images/default/no-image.svg'})` }}>
-                                <div style={styles.postCover}>
-                                    <h1 className="post-title" style={styles.title}>
-                                        {post.title}
-                                    </h1>
-                                    <div style={styles.createdTime}>
-                                        <span style={styles.createDate}>{moment(post.date).format('YYYY.MM.DD')}</span>
-                                        <span>{`(${moment(post.date).fromNow()})`}</span>
+                        <>
+                            <Helmet
+                                title={post.title}
+                            />
+                            <div style={styles.viewContainer}>
+                                <div className="post-header" style={{ ...styles.postHeader, backgroundImage: `url(${post.cover || '/images/default/no-image.svg'})` }}>
+                                    <div style={styles.postCover}>
+                                        <h1 className="post-title" style={styles.title}>
+                                            {post.title}
+                                        </h1>
+                                        <div style={styles.createdTime}>
+                                            <span style={styles.createDate}>{moment(post.date).format('YYYY.MM.DD')}</span>
+                                            <span>{`(${moment(post.date).fromNow()})`}</span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="markdown-body" dangerouslySetInnerHTML={{ __html: post.content }} />
+                                <div style={styles.tags}>
+                                    <Icon type="tags" style={styles.tagsIcon} />
+                                    <Tags tags={post.tags ? post.tags.trim().split(',') : []} onClick={this.handleClickTag} />
+                                </div>
+                                <Divider />
+                                <div style={styles.authorInfo}>
+                                    <AuthorInfo author={author} />
+                                </div>
+                                <Divider />
+                                <Comments />
+                                <BackTop scrollStepInPx={100} delayInMs={10} />
                             </div>
-                            <div className="markdown-body" dangerouslySetInnerHTML={{ __html: post.content }} />
-                            <div style={styles.tags}>
-                                <Icon type="tags" style={styles.tagsIcon} />
-                                <Tags tags={post.tags ? post.tags.trim().split(',') : []} onClick={this.handleClickTag} />
-                            </div>
-                            <Divider />
-                            <div style={styles.authorInfo}>
-                                <AuthorInfo author={author} />
-                            </div>
-                            <Divider />
-                            <Comments />
-                            <BackTop scrollStepInPx={100} delayInMs={10} />
-                        </div>
+                        </>
                     )
                 }
             </div>
