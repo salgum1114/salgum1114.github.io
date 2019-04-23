@@ -137,8 +137,8 @@ class Search extends Component<IProps, IState> {
         if (this.state.isMobile) {
             this.handleCancel();
         }
-        this.props.history.push(`/posts?tag=${key}`);
-        this.props.location.pathname = `/posts?tag=${key}`;
+        this.props.history.push(`/?tag=${key}`);
+        this.props.location.pathname = `/?tag=${key}`;
     }
 
     handleSearch = (value: string) => {
@@ -160,11 +160,11 @@ class Search extends Component<IProps, IState> {
             search: value,
         });
         if (value.length) {
-            this.props.history.push(`/posts?search=${value}`);
-            this.props.location.pathname = `/posts?search=${value}`;
+            this.props.history.push(`/?search=${value}`);
+            this.props.location.pathname = `/?search=${value}`;
         } else {
-            this.props.history.push('/posts');
-            this.props.location.pathname = '/posts';
+            this.props.history.push('/');
+            this.props.location.pathname = '/';
         }
     }
 
@@ -182,11 +182,11 @@ class Search extends Component<IProps, IState> {
             search,
         });
         if (search.length) {
-            this.props.history.push(`/posts?search=${search}`);
-            this.props.location.pathname = `/posts?search=${search}`;
+            this.props.history.push(`/?search=${search}`);
+            this.props.location.pathname = `/?search=${search}`;
         } else {
-            this.props.history.push('/posts');
-            this.props.location.pathname = '/posts';
+            this.props.history.push('/');
+            this.props.location.pathname = '/';
         }
     }
 

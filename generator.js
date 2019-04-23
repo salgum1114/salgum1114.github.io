@@ -10,12 +10,25 @@ const sitemapPath = './sitemap.xml';
 const metadataPath = './_metadata/metadata.json';
 const tagsPath = './_metadata/tags.json';
 const postsPath = './_metadata/posts.json';
+const routesPath = './_metadata/routes.json';
 
-const getFiles = (dir, files = []) => {
+const routes = [
+    {
+        path: '/:id',
+        layout: 'post',
+    },
+];
+
+const getFiles = (dir = '', files = []) => {
     fs.readdirSync(dir).forEach((file) => {
         const path = `${dir}/${file}`;
         const stat = fs.statSync(path);
         if (stat.isDirectory()) {
+            const directory = path.replace(postPath, '');
+            routes.push({
+                path: `${directory}/:id`,
+                layout: 'post',
+            });
             getFiles(path, files);
         } else {
             files.push({
@@ -54,7 +67,7 @@ files.forEach((f) => {
     if (preview && preview.length > 200) {
         preview = `${preview.substring(0, 200)}...`;
     }
-    const newPath = `/posts/${f.path.substring(9, f.path.length - 3)}`;
+    const newPath = `${f.path.replace(postPath, '')}`;
     const metadata = {
         path: newPath,
         preview,
@@ -141,6 +154,8 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 </urlset>`;
 
 fs.writeFileSync(sitemapPath, sitemapXml);
+
+fs.writeFileSync(routesPath, JSON.stringify(routes, null, '\t'));
 
 const sortedMetadatas = sortBy(Object.values(metadatas), 'date').reverse().reduce((prev, curr) => {
     return Object.assign(prev, { [curr.path]: curr });

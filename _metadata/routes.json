@@ -1,34 +1,10 @@
 [
-    {
-        "path": "/posts",
-        "title": "개발 일지",
-        "order": 10,
-        "layout": "posts",
-        "routes": [
-            {
-                "path": "/posts/css/:id",
-                "layout": "post"
-            },
-            {
-                "path": "/posts/fabricjs/:id",
-                "layout": "post"
-            },
-            {
-                "path": "/posts/reactjs/:id",
-                "layout": "post"
-            },
-            {
-                "path": "/posts/js/:id",
-                "layout": "post"
-            },
-            {
-                "path": "/posts/webpack/:id",
-                "layout": "post"
-            },
-            {
-                "path": "/posts/:id",
-                "layout": "post"
-            }
-        ]
-    }
+	{
+		"path": "/:id",
+		"layout": "post"
+	},
+	{
+		"path": "/webpack/:id",
+		"layout": "post"
+	}
 ]

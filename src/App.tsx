@@ -120,9 +120,7 @@ class App extends Component<IProps> {
                         <Route
                             exact={true}
                             path="/"
-                            render={() => {
-                                return <Redirect to="/posts" />
-                            }}
+                            component={Posts}
                         />
                         {mRoutes}
                     </MainRoute>

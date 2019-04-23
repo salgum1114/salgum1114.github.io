@@ -100,8 +100,8 @@ class Post extends Component<IProps, IState> {
 
     handleClickTag = (e: any) => {
         const tag = e.target.textContent;
-        this.props.history.push(`/posts?tag=${tag}`);
-        this.props.location.pathname = `/posts?tag=${tag}`;
+        this.props.history.push(`/?tag=${tag}`);
+        this.props.location.pathname = `/?tag=${tag}`;
     }
 
     render() {

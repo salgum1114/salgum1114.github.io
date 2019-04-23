@@ -2,19 +2,19 @@
 	"webpack": {
 		"total": 1,
 		"paths": [
-			"/posts/webpack/2019-04-22-uglifyjs-to-terser"
+			"/webpack/2019-04-22-uglifyjs-to-terser.md"
 		]
 	},
 	"uglifyjs": {
 		"total": 1,
 		"paths": [
-			"/posts/webpack/2019-04-22-uglifyjs-to-terser"
+			"/webpack/2019-04-22-uglifyjs-to-terser.md"
 		]
 	},
 	"terser-webpack-plugin": {
 		"total": 1,
 		"paths": [
-			"/posts/webpack/2019-04-22-uglifyjs-to-terser"
+			"/webpack/2019-04-22-uglifyjs-to-terser.md"
 		]
 	}
 }
