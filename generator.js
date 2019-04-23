@@ -27,7 +27,7 @@ const getFiles = (dir = '', files = []) => {
         if (stat.isDirectory()) {
             const directory = path.replace(postPath, '');
             routes.push({
-                path: `${directory}/:id`,
+                path: `/posts${directory}/:id`,
                 layout: 'post',
             });
             getFiles(path, files);
@@ -68,7 +68,7 @@ files.forEach((f) => {
     if (preview && preview.length > 200) {
         preview = `${preview.substring(0, 200)}...`;
     }
-    const newPath = `${f.path.replace(postPath, '').replace(extension, '')}`;
+    const newPath = `${f.path.replace(postPath, '/posts').replace(extension, '')}`;
     const metadata = {
         path: newPath,
         preview,

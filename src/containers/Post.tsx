@@ -5,6 +5,7 @@ import { Divider, Icon } from 'antd';
 import { RouteChildrenProps } from 'react-router';
 import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
+import Helmet from 'react-helmet';
 
 import { IReducer } from '../reducers';
 import { IPost } from '../types/post';
@@ -16,7 +17,6 @@ import AuthorInfo from '../components/AuthorInfo';
 import { IAuthor } from '../types/author';
 import { PostActions } from '../actions/posts';
 import BackTop from '../components/BackTop';
-import Helmet from 'react-helmet';
 
 interface IProps extends RouteChildrenProps {
     id: string;
