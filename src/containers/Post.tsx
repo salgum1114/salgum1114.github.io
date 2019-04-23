@@ -16,6 +16,7 @@ import AuthorInfo from '../components/AuthorInfo';
 import { IAuthor } from '../types/author';
 import { PostActions } from '../actions/posts';
 import BackTop from '../components/BackTop';
+import Helmet from 'react-helmet';
 
 interface IProps extends RouteChildrenProps {
     id: string;
@@ -108,6 +109,9 @@ class Post extends Component<IProps, IState> {
         const { error, post, author } = this.state;
         return (
             <div className="container" style={styles.container}>
+                <Helmet
+                    title={post.title}
+                />
                 {
                     isEmpty(post) && error ? (
                         <ErrorPage status={404} />
@@ -119,7 +123,7 @@ class Post extends Component<IProps, IState> {
                                         {post.title}
                                     </h1>
                                     <div style={styles.createdTime}>
-                                        <span style={styles.createDate}>{moment(post.date).format('YYYY-MM-DD HH:mm')}</span>
+                                        <span style={styles.createDate}>{moment(post.date).format('YYYY.MM.DD')}</span>
                                         <span>{`(${moment(post.date).fromNow()})`}</span>
                                     </div>
                                 </div>

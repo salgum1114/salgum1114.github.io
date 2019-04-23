@@ -17,6 +17,7 @@ import { IPost } from '../types/post';
 import { IAuthor } from '../types/author';
 import { ITag } from '../types/tag';
 import { PostActions } from '../actions/posts';
+import Helmet from 'react-helmet';
 
 interface IProps extends RouteChildrenProps {
     metadatas: Record<string, IPost>;
@@ -189,7 +190,7 @@ class Posts extends Component<IProps, IState> {
                                 >
                                     <Card.Meta
                                         avatar={<Avatar src={author.avatar}>{author.name.charAt(0).toUpperCase()}</Avatar>}
-                                        title={metadata.title.length > 30 ? metadata.title.substring(0, 30).concat('...') : metadata.title}
+                                        title={<h2 style={{ fontSize: 'inherit', color: 'inherit' }}>{metadata.title.length > 30 ? metadata.title.substring(0, 30).concat('...') : metadata.title}</h2>}
                                         description={moment(metadata.date).fromNow()}
                                     />
                                     <div style={styles.cardPreview}>
@@ -207,6 +208,7 @@ class Posts extends Component<IProps, IState> {
     render() {
         return (
             <div className="container">
+                <Helmet title="Dev.log" />
                 {this.renderCard()}
             </div>
         );
