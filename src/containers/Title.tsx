@@ -143,9 +143,9 @@ class Title extends Component<IProps, IState> {
                     <Icon style={{ fontSize: '1.25rem' }} type="bars" onClick={this.handlePosts} />
                 </div>
                 <div style={styles.title}>
-                    <div className={classname}>
+                    <h2 className={classname}>
                         {visible && post.title}
-                    </div>
+                    </h2>
                     {!visible && (
                         <a href="https://github.com/salgum1114" target="_blank">
                             <Icon style={{ fontSize: '1.25rem' }} type="github" />
