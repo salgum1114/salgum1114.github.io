@@ -13,6 +13,7 @@ const styles: CSSMapper = {
     header: {
         padding: 0,
         boxShadow: '0px 0px 10px -2px rgba(0, 0, 0, 0.75)',
+        zIndex: 1000,
     },
     content: {
         overflow: 'auto',
