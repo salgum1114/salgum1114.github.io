@@ -15,14 +15,8 @@ const routesPath = './_metadata/routes.json';
 
 const routes = [
     {
-        path: '/posts',
-        layout: 'posts',
-        routes: [
-            {
-                path: '/posts/:id',
-                layout: 'post',
-            },
-        ],
+        path: '/:id',
+        layout: 'post',
     },
 ];
 
@@ -32,8 +26,8 @@ const getFiles = (dir = '', files = []) => {
         const stat = fs.statSync(path);
         if (stat.isDirectory()) {
             const directory = path.replace(postPath, '');
-            routes[0].routes.push({
-                path: `/posts${directory}/:id`,
+            routes.push({
+                path: `${directory}/:id`,
                 layout: 'post',
             });
             getFiles(path, files);
@@ -74,7 +68,7 @@ files.forEach((f) => {
     if (preview && preview.length > 200) {
         preview = `${preview.substring(0, 200)}...`;
     }
-    const newPath = `${f.path.replace(postPath, '/posts').replace(extension, '')}`;
+    const newPath = `${f.path.replace(postPath, '').replace(extension, '')}`;
     const metadata = {
         path: newPath,
         preview,

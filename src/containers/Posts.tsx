@@ -8,6 +8,7 @@ import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
 import localStorage from 'store/storages/localStorage';
+import Helmet from 'react-helmet';
 
 import Masonry from '../components/masonry';
 import { CSSMapper } from '../types/utils';
@@ -17,7 +18,6 @@ import { IPost } from '../types/post';
 import { IAuthor } from '../types/author';
 import { ITag } from '../types/tag';
 import { PostActions } from '../actions/posts';
-import Helmet from 'react-helmet';
 
 interface IProps extends RouteChildrenProps {
     metadatas: Record<string, IPost>;

@@ -84,7 +84,7 @@ class Title extends Component<IProps, IState> {
 
     onScroll = throttle((e: any) => {
         if (e.target.scrollTop >= 64) {
-            if (this.props.location.pathname === '/posts') {
+            if (this.props.location.pathname === '/') {
                 return;
             }
             const content = document.querySelector('.blog-backtop');
@@ -127,8 +127,8 @@ class Title extends Component<IProps, IState> {
         this.setState({
             visible: false,
         });
-        history.push('/posts');
-        location.pathname = '/posts';
+        history.push('/');
+        location.pathname = '/';
     }
 
     render() {
