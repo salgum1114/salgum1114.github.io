@@ -6,6 +6,7 @@ const sortBy = require('lodash/sortBy');
 
 const postPath = './_posts';
 const encoding = 'UTF-8';
+const extension = '.md';
 const sitemapPath = './sitemap.xml';
 const metadataPath = './_metadata/metadata.json';
 const tagsPath = './_metadata/tags.json';
@@ -67,7 +68,7 @@ files.forEach((f) => {
     if (preview && preview.length > 200) {
         preview = `${preview.substring(0, 200)}...`;
     }
-    const newPath = `${f.path.replace(postPath, '')}`;
+    const newPath = `${f.path.replace(postPath, '').replace(extension, '')}`;
     const metadata = {
         path: newPath,
         preview,
