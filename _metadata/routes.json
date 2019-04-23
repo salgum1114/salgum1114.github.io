@@ -1,10 +1,16 @@
 [
 	{
-		"path": "/:id",
-		"layout": "post"
-	},
-	{
-		"path": "/posts/webpack/:id",
-		"layout": "post"
+		"path": "/posts",
+		"layout": "posts",
+		"routes": [
+			{
+				"path": "/posts/:id",
+				"layout": "post"
+			},
+			{
+				"path": "/posts/webpack/:id",
+				"layout": "post"
+			}
+		]
 	}
 ]

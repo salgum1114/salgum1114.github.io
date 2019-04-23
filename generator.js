@@ -15,8 +15,14 @@ const routesPath = './_metadata/routes.json';
 
 const routes = [
     {
-        path: '/:id',
-        layout: 'post',
+        path: '/posts',
+        layout: 'posts',
+        routes: [
+            {
+                path: '/posts/:id',
+                layout: 'post',
+            },
+        ],
     },
 ];
 
@@ -26,7 +32,7 @@ const getFiles = (dir = '', files = []) => {
         const stat = fs.statSync(path);
         if (stat.isDirectory()) {
             const directory = path.replace(postPath, '');
-            routes.push({
+            routes[0].routes.push({
                 path: `/posts${directory}/:id`,
                 layout: 'post',
             });
