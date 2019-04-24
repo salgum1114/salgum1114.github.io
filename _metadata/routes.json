@@ -4,21 +4,11 @@
 		"layout": "post"
 	},
 	{
-		"path": "/reactjs",
-		"routes": [
-			{
-				"path": "/reactjs/:id",
-				"layout": "post"
-			}
-		]
+		"path": "/reactjs/:id",
+		"layout": "post"
 	},
 	{
-		"path": "/webpack",
-		"routes": [
-			{
-				"path": "/webpack/:id",
-				"layout": "post"
-			}
-		]
+		"path": "/webpack/:id",
+		"layout": "post"
 	}
 ]

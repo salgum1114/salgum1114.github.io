@@ -27,18 +27,9 @@ const getFiles = (dir = '', files = []) => {
         if (stat.isDirectory()) {
             const directory = path.replace(postPath, '');
             routes.push({
-                path: `${directory}`,
-                routes: [
-                    {
-                        path: `${directory}/:id`,
-                        layout: 'post',
-                    },
-                ],
+                path: `${directory}/:id`,
+                layout: 'post',
             });
-            // routes.push({
-            //     path: `${directory}/:id`,
-            //     layout: 'post',
-            // });
             getFiles(path, files);
         } else {
             files.push({
