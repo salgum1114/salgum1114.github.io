@@ -4,6 +4,10 @@
 		"layout": "post"
 	},
 	{
+		"path": "/reactjs/:id",
+		"layout": "post"
+	},
+	{
 		"path": "/webpack/:id",
 		"layout": "post"
 	}
