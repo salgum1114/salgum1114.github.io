@@ -1,0 +1,11 @@
+{
+	"/webpack/2019-04-22-uglifyjs-to-terser": {
+		"path": "/webpack/2019-04-22-uglifyjs-to-terser",
+		"preview": "최근 React Design Editor에 빌드 실패 관련 이슈가 올라왔다.\n\n내용인 즉슨, production으로 빌드시 UglifyJsPlugin에서 Unexpected token: keyword «const»라는\n오류가 발생하여 계속해서 빌드에 실패한다는 것이다.\n\n[Bug] Not able to create build for the applicati...",
+		"title": "UglifyJsPlugin const 오류 해결 방법",
+		"author": "salgum1114",
+		"date": "2019-04-22 21:05",
+		"tags": "webpack, uglifyjs, terser-webpack-plugin",
+		"cover": "/static/images/covers/webpack.png"
+	}
+}

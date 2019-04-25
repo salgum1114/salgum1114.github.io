@@ -1,24 +1,11 @@
-[
-	{
-		"path": "/:id",
-		"layout": "post"
+{
+	"/": {
+		"page": "/"
 	},
-	{
-		"path": "/reactjs",
-		"routes": [
-			{
-				"path": "/reactjs/:id",
-				"layout": "post"
-			}
-		]
-	},
-	{
-		"path": "/webpack",
-		"routes": [
-			{
-				"path": "/webpack/:id",
-				"layout": "post"
-			}
-		]
+	"/webpack/2019-04-22-uglifyjs-to-terser": {
+		"page": "/post",
+		"query": {
+			"slug": "/webpack/2019-04-22-uglifyjs-to-terser"
+		}
 	}
-]
+}

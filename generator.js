@@ -8,39 +8,33 @@ const postPath = './_posts';
 const encoding = 'UTF-8';
 const extension = '.md';
 const sitemapPath = './sitemap.xml';
-const metadataPath = './_metadata/metadata.json';
+const metadatasPath = './_metadata/metadatas.json';
 const tagsPath = './_metadata/tags.json';
 const postsPath = './_metadata/posts.json';
 const routesPath = './_metadata/routes.json';
 
-const routes = [
-    {
-        path: '/:id',
-        layout: 'post',
+const routes = {
+    '/': {
+        page: '/',
     },
-];
+}
 
 const getFiles = (dir = '', files = []) => {
     fs.readdirSync(dir).forEach((file) => {
         const path = `${dir}/${file}`;
         const stat = fs.statSync(path);
         if (stat.isDirectory()) {
-            const directory = path.replace(postPath, '');
-            routes.push({
-                path: `${directory}`,
-                routes: [
-                    {
-                        path: `${directory}/:id`,
-                        layout: 'post',
-                    },
-                ],
-            });
-            // routes.push({
-            //     path: `${directory}/:id`,
-            //     layout: 'post',
-            // });
             getFiles(path, files);
         } else {
+            const filePath = path.replace(postPath, '').replace(extension, '');
+            Object.assign(routes, {
+                [filePath]: {
+                    page: '/post',
+                    query: {
+                        slug: filePath,
+                    },
+                },
+            });
             files.push({
                 path,
                 stat,
@@ -168,17 +162,22 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 </urlset>`;
 
 fs.writeFileSync(sitemapPath, sitemapXml);
+console.log('generated sitemap.xml...');
 
 fs.writeFileSync(routesPath, JSON.stringify(routes, null, '\t'));
+console.log('generated routes.json...');
 
 const sortedMetadatas = sortBy(Object.values(metadatas), 'date').reverse().reduce((prev, curr) => {
     return Object.assign(prev, { [curr.path]: curr });
 }, {});
 
-fs.writeFileSync(metadataPath, JSON.stringify(sortedMetadatas, null, '\t'), {
+fs.writeFileSync(metadatasPath, JSON.stringify(sortedMetadatas, null, '\t'), {
     encoding: 'UTF-8',
 });
+console.log('generated metadatas.json...');
 
 fs.writeFileSync(tagsPath, JSON.stringify(tags, null, '\t'));
+console.log('generated tags.json...');
 
 fs.writeFileSync(postsPath, JSON.stringify(posts, null, '\t'));
+console.log('generated posts.json...');

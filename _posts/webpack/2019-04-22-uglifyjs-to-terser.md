@@ -3,7 +3,7 @@ title: UglifyJsPlugin const 오류 해결 방법
 author: salgum1114
 date: 2019-04-22 21:05
 tags: webpack, uglifyjs, terser-webpack-plugin
-cover: /images/covers/webpack.png
+cover: /static/images/covers/webpack.png
 ---
 
 최근 [React Design Editor][react-design-editor]에 빌드 실패 관련 이슈가 올라왔다.
@@ -68,13 +68,13 @@ npm ERR! C:\Users\manish.kumar.GATEWAYGROUP\AppData\Roaming\npm-cache_logs\2019-
 
 최근 이슈는 아니지만, 비슷한 사례가 많이 나온다.
 
-![uglify-js-issue](/images/webpack/uglifyjs-const-issue-search.png)
+![uglify-js-issue](/static/images/webpack/uglifyjs-const-issue-search.png)
 
 [첫번째 이슈][uglify-js-issue] 사이트에서 내용을 읽어보니, UglifyJsPlugin 버전 2부터 uglify-es가 버려졌으니 es6를 사용하고 싶으면 terser-webpack-plugin을 사용하라는 내용인것 같다.
 
 실제로 확인해보니 [uglifyjs-webpack-plugin 릴리즈 태그 v2.0 Change Log][uglify-js-2.0]에 내용이 있었다.
 
-![uglify-js-2.0](/images/webpack/uglifyjs-v2-change-log.png)
+![uglify-js-2.0](/static/images/webpack/uglifyjs-v2-change-log.png)
 
 > 근데 terser가 무슨 뜻이지? naver 사전에서는 간결한 이라고 나온다.
 
@@ -134,7 +134,7 @@ optimization: {
 
 이제 변경된 옵션으로 [React Design Editor][react-design-editor]를 빌드해본다.
 
-![terser-webpack-plugin-build](/images/webpack/terser-webpack-plugin-build.png)
+![terser-webpack-plugin-build](/static/images/webpack/terser-webpack-plugin-build.png)
 
 #### 성공한것 같다.
 

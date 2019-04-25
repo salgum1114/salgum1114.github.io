@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.container {
+    padding: 24px 48px;
+    height: 100%;
+    width: 100%;
+    .container-col {
+        padding: 16px 16px;
+    }
+    &-title {
+        font-size: 1.25rem !important;
+        transition: all 0.25s ease-in;
+        transform: translateY(10px);
+        opacity: 0;
+        margin-bottom: 0;
+        &.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .container {
+        padding: 24px 16px;
+        .container-col {
+            padding: 16px 0px;
+        }
+        &-title {
+            font-size: 1em !important;
+        }
+        .post-header {
+            height: 15rem !important;
+        }
+        .post-title {
+            font-size: 1.75em !important;
+        }
+    }
+}
