@@ -79,6 +79,7 @@ files.forEach((f) => {
     const post = {
         path: newPath,
         content: html,
+        preview,
     };
     const sitemap = {
         path: newPath,
@@ -161,23 +162,34 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
     }, '')}
 </urlset>`;
 
+const getDate = () => {
+    const date = new Date();
+    return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+}
+
 fs.writeFileSync(sitemapPath, sitemapXml);
-console.log('generated sitemap.xml...');
+fs.writeFileSync(`./static/sitemap.xml`, sitemapXml);
+console.log(`[${getDate()}]`, 'generated sitemap.xml...');
 
 fs.writeFileSync(routesPath, JSON.stringify(routes, null, '\t'));
-console.log('generated routes.json...');
+console.log(`[${getDate()}]`, 'generated routes.json...');
 
 const sortedMetadatas = sortBy(Object.values(metadatas), 'date').reverse().reduce((prev, curr) => {
     return Object.assign(prev, { [curr.path]: curr });
 }, {});
-
 fs.writeFileSync(metadatasPath, JSON.stringify(sortedMetadatas, null, '\t'), {
     encoding: 'UTF-8',
 });
-console.log('generated metadatas.json...');
+fs.writeFileSync(`./static/metadatas.json`, sortedMetadatas);
+console.log(`[${getDate()}]`, 'generated metadatas.json...');
 
 fs.writeFileSync(tagsPath, JSON.stringify(tags, null, '\t'));
-console.log('generated tags.json...');
+fs.writeFileSync(`./static/tags.json`, tags);
+console.log(`[${getDate()}]`, 'generated tags.json...');
 
-fs.writeFileSync(postsPath, JSON.stringify(posts, null, '\t'));
-console.log('generated posts.json...');
+const sortedPosts = sortBy(Object.values(posts), 'date').reverse().reduce((prev, curr) => {
+    return Object.assign(prev, { [curr.path]: curr });
+}, {});
+fs.writeFileSync(postsPath, JSON.stringify(sortedPosts, null, '\t'));
+fs.writeFileSync(`./static/posts.json`, sortedPosts);
+console.log(`[${getDate()}]`, 'generated posts.json...');

@@ -9,7 +9,7 @@
         "start": "NODE_ENV=production node server.js",
         "export": "next export",
         "serve": "serve -p 8080 ./out",
-        "deploy": "node generator.js && next build && next export"
+        "deploy": "rmdir /q /s out .next && node generator.js && next build && next export && gh-pages -d out"
     },
     "repository": {
         "type": "git",
@@ -28,13 +28,16 @@
     "homepage": "https://salgum1114.github.io",
     "dependencies": {
         "@types/next": "^8.0.4",
+        "@types/react-helmet": "^5.0.8",
         "antd": "^3.16.5",
         "classnames": "^2.2.6",
         "express": "^4.16.4",
         "lodash": "^4.17.11",
         "next": "7.0.2",
-        "react": "^16.8.4",
+        "nprogress": "^0.2.0",
+        "react": "^16.8.6",
         "react-dom": "^16.8.4",
+        "react-helmet": "^5.2.0",
         "react-masonry-component": "^6.2.1",
         "react-mqls": "^0.1.11",
         "store": "^2.0.12"
@@ -44,6 +47,7 @@
         "@zeit/next-less": "^1.0.1",
         "@zeit/next-typescript": "^1.1.1",
         "babel-plugin-import": "^1.11.0",
+        "gh-pages": "^2.0.1",
         "html-to-text": "^5.1.1",
         "less": "^3.9.0",
         "serve": "^11.0.0",

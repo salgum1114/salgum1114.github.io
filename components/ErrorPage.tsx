@@ -5,11 +5,11 @@ const ErrorPage = (props: any) => {
         switch (status) {
             case 404:
                 return {
-                    backgroundImage: 'url("/images/default/error_404.png")',
+                    backgroundImage: 'url("/static/images/default/error_404.png")',
                 };
             default:
                 return {
-                    backgroundImage: 'url("/images/default/error_404.png")',
+                    backgroundImage: 'url("/static/images/default/error_404.png")',
                 };
         }
     };

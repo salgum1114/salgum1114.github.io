@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Divider, Icon } from 'antd';
-import Head from 'next/head';
 import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
 import Router, { RouterProps } from 'next/router';
+import Helmet from 'react-helmet';
 
 import { IPost } from '../types/post';
 import { CSSMapper } from '../types/utils';
@@ -78,7 +78,6 @@ class Post extends Component<IProps, IState> {
     }
 
     getPost = (router: any, posts: Record<string, IPost>, authors: Record<string, IAuthor>) => {
-        console.log(router);
         const post = posts[router.query.slug];
         if (post) {
             const author = authors[post.author];
@@ -112,11 +111,9 @@ class Post extends Component<IProps, IState> {
                         <ErrorPage status={404} />
                     ) : (
                         <>
-                            <Head>
-                                <title>{post.title}</title>
-                            </Head>
+                            <Helmet title={post.title} />
                             <div style={styles.viewContainer}>
-                                <div className="post-header" style={{ ...styles.postHeader, backgroundImage: `url(${post.cover || '/images/default/no-image.svg'})` }}>
+                                <div className="post-header" style={{ ...styles.postHeader, backgroundImage: `url(${post.cover || '/static/images/default/no-image.svg'})` }}>
                                     <div style={styles.postCover}>
                                         <h1 className="post-title" style={styles.title}>
                                             {post.title}

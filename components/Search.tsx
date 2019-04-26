@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Tag, Icon } from 'antd';
 import localStorage from 'store/storages/localStorage';
-import Router from 'next/router';
+import Router, { RouterProps } from 'next/router';
 
 import { CSSMapper } from '../types/utils';
 import { ITags } from '../types/tag';
@@ -10,14 +10,13 @@ import Dialog from '../components/Dialog';
 import Events from '../utils/Events';
 
 interface IProps {
-    setTags?: (args?: any) => void;
-    onCancel?: () => void;
+    router?: RouterProps;
+    tags: ITags;
     post?: IPost;
 }
 
 interface IState {
-    tags: ITags;
-    search?: string;
+    search?: string | string[];
     searchHistory: string[];
     postHistory: { [key: string]: any }[];
     isMobile: boolean;
@@ -39,6 +38,7 @@ const styles: CSSMapper = {
     },
     tag: {
         margin: 8,
+        cursor: 'pointer',
     },
     historyList: {
         display: 'flex',
@@ -64,8 +64,7 @@ const styles: CSSMapper = {
 }
 
 class Search extends Component<IProps, IState> {
-    state = {
-        tags: {},
+    state: IState = {
         search: '',
         searchHistory: [],
         postHistory: [],
@@ -94,40 +93,34 @@ class Search extends Component<IProps, IState> {
         this.setState({
             isMobile,
         });
-        const { router } = Router;
-        console.log(router.route);
-        // const { location } = this.props;
-        // const params = new URLSearchParams(location.search);
-        // const search = params.get('search');
-        // const searchHistory = JSON.parse(localStorage.read('searchHistory')) || [];
-        // const postHistory = JSON.parse(localStorage.read('postHistory')) || [];
-        // this.setState({
-        //     search,
-        //     searchHistory,
-        //     postHistory,
-        // });
-        // metadataService.getTags().then(response => {
-        //     this.props.setTags(response.data);
-        //     this.setState({
-        //         tags: response.data,
-        //     });
-        // });
+        const { router } = this.props;
+        let search;
+        if (router.query) {
+            search = router.query.search;
+        }
+        const searchHistory = JSON.parse(localStorage.read('searchHistory')) || [];
+        const postHistory = JSON.parse(localStorage.read('postHistory')) || [];
+        this.setState({
+            search,
+            searchHistory,
+            postHistory,
+        });
     }
 
-    // componentWillReceiveProps(nextProps: IProps) {
-    //     if (this.state.isMobile
-    //     && (nextProps.location.pathname !== this.props.location.pathname)) {
-    //         this.setState({
-    //             collapsed: false,
-    //         });
-    //     }
-    //     if (nextProps.post !== this.props.post) {
-    //         const postHistory = JSON.parse(localStorage.read('postHistory')) || [];
-    //         this.setState({
-    //             postHistory,
-    //         });
-    //     }
-    // }
+    componentWillReceiveProps(nextProps: IProps) {
+        if (this.state.isMobile
+        && (nextProps.router.pathname !== this.props.router.pathname)) {
+            this.setState({
+                collapsed: false,
+            });
+        }
+        if (nextProps.post !== this.props.post) {
+            const postHistory = JSON.parse(localStorage.read('postHistory')) || [];
+            this.setState({
+                postHistory,
+            });
+        }
+    }
 
     handleClick = (key: string) => {
         if (this.state.isMobile) {
@@ -225,7 +218,8 @@ class Search extends Component<IProps, IState> {
     }
 
     render() {
-        const { isMobile, collapsed, tags, search, searchHistory, postHistory } = this.state;
+        const { tags } = this.props;
+        const { isMobile, collapsed, search, searchHistory, postHistory } = this.state;
         return (
             <Dialog
                 visible={collapsed}

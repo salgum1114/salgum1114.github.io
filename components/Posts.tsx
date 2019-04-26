@@ -16,7 +16,7 @@ import { IAuthor } from '../types/author';
 import { ITag } from '../types/tag';
 
 interface IProps {
-    metadatas: Record<string, IPost>;
+    posts: Record<string, IPost>;
     authors: Record<string, IAuthor>;
     tags: Record<string, ITag>;
     setPost?: (args?: any) => void;
@@ -24,7 +24,7 @@ interface IProps {
 }
 
 interface IState {
-    metadatas: Record<string, IPost>;
+    posts: Record<string, IPost>;
 }
 
 const styles: CSSMapper = {
@@ -69,8 +69,8 @@ const styles: CSSMapper = {
 }
 
 class Posts extends Component<IProps, IState> {
-    state = {
-        metadatas: this.props.metadatas,
+    state: IState = {
+        posts: this.props.posts,
     }
 
     componentDidMount() {
@@ -78,17 +78,17 @@ class Posts extends Component<IProps, IState> {
         const postsScroll = localStorage.read('postsScroll');
         const scrollTop = postsScroll ? parseInt(postsScroll, 10) : 0;
         document.querySelector('.ant-layout-content').scrollTo(0, scrollTop);
-        const { tags, metadatas, router } = this.props;
-        this.getMetadatas(router.query, tags, metadatas);
-    }
+        const { tags, posts, router } = this.props;
+        this.getPosts(router.query, tags, posts);
+    }getPosts
 
     componentWillReceiveProps(nextProps: IProps) {
-        const { tags, metadatas, router } = nextProps;
+        const { tags, posts, router } = nextProps;
         if (!isEmpty(router.query) && !isEmpty(tags)) {
-            this.getMetadatas(router.query, tags, metadatas);
+            this.getPosts(router.query, tags, posts);
         } else {
             this.setState({
-                metadatas,
+                posts,
             });
         }
     }
@@ -109,21 +109,21 @@ class Posts extends Component<IProps, IState> {
         document.querySelector('.ant-layout-content').removeEventListener('scroll', this.onScroll);
     }
 
-    getMetadatas = (params: any, tags: Record<string, ITag>, metadatas: Record<string, IPost>) => {
+    getPosts = (params: any, tags: Record<string, ITag>, posts: Record<string, IPost>) => {
         const tag = tags[params.tag];
         const search = params.search;
-        if (tag && !isEmpty(metadatas)) {
+        if (tag && !isEmpty(posts)) {
             const { paths } = tag;
-            const filteredMetadatas = paths.reduce((prev, curr) => {
-                const metadata = metadatas[curr];
+            const filteredPosts = paths.reduce((prev, curr) => {
+                const metadata = posts[curr];
                 return Object.assign(prev, { [curr]: metadata });
             }, {});
             this.setState({
-                metadatas: filteredMetadatas,
+                posts: filteredPosts,
             });
         } else if(search) {
-            const filteredMetadatas = Object.keys(metadatas).reduce((prev, curr) => {
-                const metadata = metadatas[curr];
+            const filteredPosts = Object.keys(posts).reduce((prev, curr) => {
+                const metadata = posts[curr];
                 if (metadata.title.toLowerCase().indexOf(search.toLowerCase()) >= 0
                 || metadata.preview.toLowerCase().indexOf(search.toLowerCase()) >= 0
                 || metadata.tags.toLowerCase().indexOf(search.toLowerCase()) >= 0) {
@@ -132,11 +132,11 @@ class Posts extends Component<IProps, IState> {
                 return prev;
             }, {});
             this.setState({
-                metadatas: filteredMetadatas,
+                posts: filteredPosts,
             });
         } else {
             this.setState({
-                metadatas,
+                posts,
             });
         }
     }
@@ -157,12 +157,12 @@ class Posts extends Component<IProps, IState> {
 
     renderCard = () => {
         const { authors } = this.props;
-        const { metadatas } = this.state;
-        return !isEmpty(metadatas) && !isEmpty(authors) ? (
+        const { posts } = this.state;
+        return !isEmpty(posts) && !isEmpty(authors) ? (
             <Masonry.Box>
                 {
-                    Object.keys(metadatas).map(key => {
-                        const metadata = metadatas[key];
+                    Object.keys(posts).map(key => {
+                        const metadata = posts[key];
                         const author = authors[metadata.author];
                         return (
                             <Masonry.Item key={key} className="container-col" col="3">
