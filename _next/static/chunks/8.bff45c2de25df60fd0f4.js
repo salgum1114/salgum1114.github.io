@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{692:function(a){a.exports={salgum1114:{name:"salgum1114",title:"Sung Gyun Oh",avatar:"/static/images/authors/salgum1114.png",bio:"Hello world!"}}}}]);
