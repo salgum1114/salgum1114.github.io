@@ -19701,6 +19701,9 @@ Not supports in Firefox and IE */
   border-left-style: solid;
   padding: 20px 45px 20px 26px;
 }
+.blog-markdown .markdown-body table {
+  display: table;
+}
 .blog-search .ant-input {
   border-radius: 3rem;
 }
@@ -19936,6 +19939,9 @@ Not supports in Firefox and IE */
 }
 .ant-layout {
   background-color: #fff;
+}
+.ant-layout-content {
+  scroll-behavior: smooth;
 }
 
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
