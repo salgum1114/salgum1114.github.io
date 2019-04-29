@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://salgum1114.github.io/react-design-editor</loc>
+        <loc>https://salgum1114.github.io/react-design-editor/</loc>
         <lastmod>2019-04-23</lastmod>
     </url>
     <url>
-        <loc>https://salgum1114.github.io/react-3d-editor</loc>
+        <loc>https://salgum1114.github.io/react-3d-editor/</loc>
         <lastmod>2019-04-23</lastmod>
     </url>
     <url>
-        <loc>https://salgum1114.github.io/css/2019-04-28-scroll-behavior-smooth</loc>
+        <loc>https://salgum1114.github.io/css/2019-04-28-scroll-behavior-smooth/</loc>
         <lastmod>2019-04-29</lastmod>
     </url>
     <url>
-        <loc>https://salgum1114.github.io/reactjs/2019-04-25-back-top-component</loc>
+        <loc>https://salgum1114.github.io/reactjs/2019-04-25-back-top-component/</loc>
         <lastmod>2019-04-29</lastmod>
     </url>
     <url>
-        <loc>https://salgum1114.github.io/webpack/2019-04-22-uglifyjs-to-terser</loc>
+        <loc>https://salgum1114.github.io/webpack/2019-04-22-uglifyjs-to-terser/</loc>
         <lastmod>2019-04-29</lastmod>
     </url>
 </urlset>
