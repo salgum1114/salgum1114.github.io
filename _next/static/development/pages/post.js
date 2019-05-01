@@ -203,19 +203,11 @@ function (_Component) {
     }, 200));
 
     _defineProperty(_assertThisInitialized(_this), "scrollStep", function () {
-      if (_this.content.scrollTop === 0) {
-        clearInterval(_this.intervalId);
-      }
-
-      _this.content.scrollTo(0, _this.content.scrollTop - _this.props.scrollStep);
+      _this.content.scrollTo(0, 0);
     });
 
     _defineProperty(_assertThisInitialized(_this), "scrollToTop", function () {
-      if (_this.content) {
-        _this.intervalId = setInterval(function () {
-          _this.scrollStep();
-        }, _this.props.delayMs);
-      }
+      _this.scrollStep();
     });
 
     return _this;
@@ -508,6 +500,7 @@ var styles = {
     justifyContent: 'center'
   },
   viewContainer: {
+    margin: 'auto',
     maxWidth: 992,
     flex: 1,
     width: 'inherit'
@@ -600,7 +593,7 @@ function (_Component) {
           return;
         }
 
-        var queryContent = document.querySelector('.blog-post');
+        var queryContent = document.querySelector('.ant-layout-content');
 
         _this.waitForPostContainer(queryContent);
       }, 5);
@@ -700,7 +693,7 @@ function (_Component) {
   _createClass(Post, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var content = document.querySelector('.blog-post');
+      var content = document.querySelector('.ant-layout-content');
       this.waitForPostContainer(content);
       var _this$props = this.props,
           router = _this$props.router,
@@ -738,8 +731,6 @@ function (_Component) {
       }), error ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_ErrorPage__WEBPACK_IMPORTED_MODULE_12__["default"], {
         status: 404
       }) : !lodash_isEmpty__WEBPACK_IMPORTED_MODULE_6___default()(post) ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react_swipeable_views__WEBPACK_IMPORTED_MODULE_10___default.a, {
-        className: "blog-post",
-        enableMouseEvents: true,
         resistance: true,
         style: styles.viewContainer,
         index: post.prev ? 1 : 0,
@@ -821,9 +812,7 @@ function (_Component) {
         }
 
         return prev;
-      }, [])), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_BackTop__WEBPACK_IMPORTED_MODULE_16__["default"], {
-        target: ".blog-post"
-      })) : this.renderSkeleton());
+      }, [])), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_BackTop__WEBPACK_IMPORTED_MODULE_16__["default"], null)) : this.renderSkeleton());
     }
   }]);
 
@@ -41212,7 +41201,7 @@ var setMetadatas = function setMetadatas(post) {
 
 /***/ }),
 
-/***/ 11:
+/***/ 16:
 /*!*****************************!*\
   !*** multi ./pages/post.js ***!
   \*****************************/
@@ -41237,5 +41226,5 @@ module.exports = dll_0f247e9cceb355cd81a4;
 
 /***/ })
 
-},[[11,"static/runtime/webpack.js","styles"]]]));;
+},[[16,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=post.js.map

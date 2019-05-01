@@ -27677,6 +27677,9 @@ Not supports in Firefox and IE */
 .ant-layout {
   background-color: #fff;
 }
+.ant-layout-content {
+  scroll-behavior: smooth;
+}
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

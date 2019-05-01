@@ -952,26 +952,16 @@ function (_Component) {
       visible: false
     });
 
-    _defineProperty(_assertThisInitialized(_this), "waitForPostContainer", function (content) {
-      setTimeout(function () {
-        if (content) {
-          _this.attachEvents(content);
+    _defineProperty(_assertThisInitialized(_this), "attachEvents", function () {
+      var content = document.querySelector('.ant-layout-content');
 
-          return;
-        }
-
-        var queryContent = document.querySelector('.blog-post');
-
-        _this.waitForPostContainer(queryContent);
-      }, 5);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "attachEvents", function (content) {
-      content.addEventListener('scroll', _this.onScroll);
+      if (content) {
+        content.addEventListener('scroll', _this.onScroll);
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "detachEvents", function () {
-      var content = document.querySelector('.container');
+      var content = document.querySelector('.ant-layout-content');
 
       if (content) {
         content.removeEventListener('scroll', _this.onScroll);
@@ -1018,17 +1008,7 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      if (next_router__WEBPACK_IMPORTED_MODULE_5___default.a.pathname !== '/') {
-        var content = document.querySelector('.blog-post');
-        this.waitForPostContainer(content);
-      } else {
-        var _content = document.querySelector('.ant-content-layout');
-
-        if (_content) {
-          this.attachEvents(_content);
-        }
-      }
-
+      this.attachEvents();
       _utils_Events__WEBPACK_IMPORTED_MODULE_6__["default"].on('setpost', function (post) {
         if (post !== _this2.state.post) {
           _this2.setState({

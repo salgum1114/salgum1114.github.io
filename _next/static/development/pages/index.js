@@ -97,19 +97,11 @@ function (_Component) {
     }, 200));
 
     _defineProperty(_assertThisInitialized(_this), "scrollStep", function () {
-      if (_this.content.scrollTop === 0) {
-        clearInterval(_this.intervalId);
-      }
-
-      _this.content.scrollTo(0, _this.content.scrollTop - _this.props.scrollStep);
+      _this.content.scrollTo(0, 0);
     });
 
     _defineProperty(_assertThisInitialized(_this), "scrollToTop", function () {
-      if (_this.content) {
-        _this.intervalId = setInterval(function () {
-          _this.scrollStep();
-        }, _this.props.delayMs);
-      }
+      _this.scrollStep();
     });
 
     return _this;
@@ -362,6 +354,7 @@ function (_Component) {
           var metadata = posts[curr];
           return Object.assign(prev, _defineProperty({}, curr, metadata));
         }, {});
+        console.log(filteredPosts);
 
         _this.setState({
           posts: filteredPosts
@@ -54742,7 +54735,7 @@ var setMetadatas = function setMetadatas(post) {
 
 /***/ }),
 
-/***/ 14:
+/***/ 11:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -54767,5 +54760,5 @@ module.exports = dll_0f247e9cceb355cd81a4;
 
 /***/ })
 
-},[[14,"static/runtime/webpack.js","styles"]]]));;
+},[[11,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map
