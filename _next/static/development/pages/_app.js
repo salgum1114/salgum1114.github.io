@@ -952,16 +952,26 @@ function (_Component) {
       visible: false
     });
 
-    _defineProperty(_assertThisInitialized(_this), "attactEvents", function () {
-      var content = document.querySelector('.ant-layout-content');
+    _defineProperty(_assertThisInitialized(_this), "waitForPostContainer", function (content) {
+      setTimeout(function () {
+        if (content) {
+          _this.attachEvents(content);
 
-      if (content) {
-        content.addEventListener('scroll', _this.onScroll);
-      }
+          return;
+        }
+
+        var queryContent = document.querySelector('.blog-post');
+
+        _this.waitForPostContainer(queryContent);
+      }, 5);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "attachEvents", function (content) {
+      content.addEventListener('scroll', _this.onScroll);
     });
 
     _defineProperty(_assertThisInitialized(_this), "detachEvents", function () {
-      var content = document.querySelector('.ant-layout-content');
+      var content = document.querySelector('.container');
 
       if (content) {
         content.removeEventListener('scroll', _this.onScroll);
@@ -970,24 +980,6 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onScroll", lodash_throttle__WEBPACK_IMPORTED_MODULE_4___default()(function (e) {
       if (e.target.scrollTop >= 64) {
-        var content = document.querySelector('.blog-backtop');
-
-        if (content) {
-          content.classList.add('visible');
-        }
-
-        if (_this.timeoutId) {
-          clearTimeout(_this.timeoutId);
-        }
-
-        _this.timeoutId = setTimeout(function () {
-          var content = document.querySelector('.blog-backtop');
-
-          if (content) {
-            content.classList.remove('visible');
-          }
-        }, 1500);
-
         if (next_router__WEBPACK_IMPORTED_MODULE_5___default.a.pathname === '/') {
           return;
         }
@@ -998,12 +990,6 @@ function (_Component) {
           });
         }
       } else {
-        var _content = document.querySelector('.blog-backtop');
-
-        if (_content) {
-          _content.classList.remove('visible');
-        }
-
         if (_this.state.visible) {
           _this.setState({
             visible: false
@@ -1032,10 +1018,15 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var content = document.querySelector('.ant-layout-content');
+      if (next_router__WEBPACK_IMPORTED_MODULE_5___default.a.pathname !== '/') {
+        var content = document.querySelector('.blog-post');
+        this.waitForPostContainer(content);
+      } else {
+        var _content = document.querySelector('.ant-content-layout');
 
-      if (content) {
-        this.attactEvents();
+        if (_content) {
+          this.attachEvents(_content);
+        }
       }
 
       _utils_Events__WEBPACK_IMPORTED_MODULE_6__["default"].on('setpost', function (post) {
@@ -1046,6 +1037,11 @@ function (_Component) {
           });
         }
       });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.detachEvents();
     }
   }, {
     key: "render",

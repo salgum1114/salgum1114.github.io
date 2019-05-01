@@ -19,6 +19,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd_lib_icon__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(antd_lib_icon__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash/throttle */ "./node_modules/lodash/throttle.js");
+/* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash_throttle__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -46,6 +48,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var BackTop =
 /*#__PURE__*/
 function (_Component) {
@@ -64,15 +67,49 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(BackTop)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_this), "scrollStep", function () {
-      _this.content.scrollTo(0, 0);
+    _defineProperty(_assertThisInitialized(_this), "attachEvent", function (content) {
+      content.addEventListener('scroll', _this.onScroll);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "scrollToTop", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+    _defineProperty(_assertThisInitialized(_this), "onScroll", lodash_throttle__WEBPACK_IMPORTED_MODULE_5___default()(function (e) {
+      var threshold = _this.props.threshold;
 
-      _this.scrollStep();
+      if (e.target.scrollTop >= threshold) {
+        var content = document.querySelector('.blog-backtop');
+        content.classList.add('visible');
+
+        if (_this.timeoutId) {
+          clearTimeout(_this.timeoutId);
+        }
+
+        _this.timeoutId = setTimeout(function () {
+          var content = document.querySelector('.blog-backtop');
+
+          if (content) {
+            content.classList.remove('visible');
+          }
+        }, 1500);
+      } else {
+        var _content = document.querySelector('.blog-backtop');
+
+        _content.classList.remove('visible');
+      }
+    }, 200));
+
+    _defineProperty(_assertThisInitialized(_this), "scrollStep", function () {
+      if (_this.content.scrollTop === 0) {
+        clearInterval(_this.intervalId);
+      }
+
+      _this.content.scrollTo(0, _this.content.scrollTop - _this.props.scrollStep);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "scrollToTop", function () {
+      if (_this.content) {
+        _this.intervalId = setInterval(function () {
+          _this.scrollStep();
+        }, _this.props.delayMs);
+      }
     });
 
     return _this;
@@ -81,7 +118,12 @@ function (_Component) {
   _createClass(BackTop, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.content = document.querySelector('.ant-layout-content');
+      var target = this.props.target;
+      this.content = document.querySelector(target);
+
+      if (this.content) {
+        this.attachEvent(this.content);
+      }
     }
   }, {
     key: "render",
@@ -102,6 +144,13 @@ function (_Component) {
 
   return BackTop;
 }(react__WEBPACK_IMPORTED_MODULE_4__["Component"]);
+
+_defineProperty(BackTop, "defaultProps", {
+  threshold: 64,
+  target: '.ant-layout-content',
+  scrollStep: 100,
+  delayMs: 16
+});
 
 /* harmony default export */ __webpack_exports__["default"] = (BackTop);
 
@@ -23093,6 +23142,86 @@ function stubFalse() {
 }
 
 module.exports = stubFalse;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/throttle.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/throttle.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var debounce = __webpack_require__(/*! ./debounce */ "./node_modules/lodash/debounce.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a throttled function that only invokes `func` at most once per
+ * every `wait` milliseconds. The throttled function comes with a `cancel`
+ * method to cancel delayed `func` invocations and a `flush` method to
+ * immediately invoke them. Provide `options` to indicate whether `func`
+ * should be invoked on the leading and/or trailing edge of the `wait`
+ * timeout. The `func` is invoked with the last arguments provided to the
+ * throttled function. Subsequent calls to the throttled function return the
+ * result of the last `func` invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the throttled function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.throttle` and `_.debounce`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to throttle.
+ * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=true]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new throttled function.
+ * @example
+ *
+ * // Avoid excessively updating the position while scrolling.
+ * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+ *
+ * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+ * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+ * jQuery(element).on('click', throttled);
+ *
+ * // Cancel the trailing throttled invocation.
+ * jQuery(window).on('popstate', throttled.cancel);
+ */
+function throttle(func, wait, options) {
+  var leading = true,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  if (isObject(options)) {
+    leading = 'leading' in options ? !!options.leading : leading;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  return debounce(func, wait, {
+    'leading': leading,
+    'maxWait': wait,
+    'trailing': trailing
+  });
+}
+
+module.exports = throttle;
 
 
 /***/ }),

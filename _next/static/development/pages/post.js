@@ -125,6 +125,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd_lib_icon__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(antd_lib_icon__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash/throttle */ "./node_modules/lodash/throttle.js");
+/* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash_throttle__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -152,6 +154,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var BackTop =
 /*#__PURE__*/
 function (_Component) {
@@ -170,15 +173,49 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(BackTop)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_this), "scrollStep", function () {
-      _this.content.scrollTo(0, 0);
+    _defineProperty(_assertThisInitialized(_this), "attachEvent", function (content) {
+      content.addEventListener('scroll', _this.onScroll);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "scrollToTop", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+    _defineProperty(_assertThisInitialized(_this), "onScroll", lodash_throttle__WEBPACK_IMPORTED_MODULE_5___default()(function (e) {
+      var threshold = _this.props.threshold;
 
-      _this.scrollStep();
+      if (e.target.scrollTop >= threshold) {
+        var content = document.querySelector('.blog-backtop');
+        content.classList.add('visible');
+
+        if (_this.timeoutId) {
+          clearTimeout(_this.timeoutId);
+        }
+
+        _this.timeoutId = setTimeout(function () {
+          var content = document.querySelector('.blog-backtop');
+
+          if (content) {
+            content.classList.remove('visible');
+          }
+        }, 1500);
+      } else {
+        var _content = document.querySelector('.blog-backtop');
+
+        _content.classList.remove('visible');
+      }
+    }, 200));
+
+    _defineProperty(_assertThisInitialized(_this), "scrollStep", function () {
+      if (_this.content.scrollTop === 0) {
+        clearInterval(_this.intervalId);
+      }
+
+      _this.content.scrollTo(0, _this.content.scrollTop - _this.props.scrollStep);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "scrollToTop", function () {
+      if (_this.content) {
+        _this.intervalId = setInterval(function () {
+          _this.scrollStep();
+        }, _this.props.delayMs);
+      }
     });
 
     return _this;
@@ -187,7 +224,12 @@ function (_Component) {
   _createClass(BackTop, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.content = document.querySelector('.ant-layout-content');
+      var target = this.props.target;
+      this.content = document.querySelector(target);
+
+      if (this.content) {
+        this.attachEvent(this.content);
+      }
     }
   }, {
     key: "render",
@@ -208,6 +250,13 @@ function (_Component) {
 
   return BackTop;
 }(react__WEBPACK_IMPORTED_MODULE_4__["Component"]);
+
+_defineProperty(BackTop, "defaultProps", {
+  threshold: 64,
+  target: '.ant-layout-content',
+  scrollStep: 100,
+  delayMs: 16
+});
 
 /* harmony default export */ __webpack_exports__["default"] = (BackTop);
 
@@ -395,20 +444,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash/isEmpty */ "./node_modules/lodash/isEmpty.js");
 /* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash_isEmpty__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "./node_modules/next/router.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_swipeable_views__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-swipeable-views */ "./node_modules/react-swipeable-views/lib/index.js");
-/* harmony import */ var react_swipeable_views__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_swipeable_views__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var react_content_loader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-content-loader */ "./node_modules/react-content-loader/dist/react-content-loader.es.js");
-/* harmony import */ var _components_ErrorPage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/ErrorPage */ "./components/ErrorPage.tsx");
-/* harmony import */ var _components_Tags__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/Tags */ "./components/Tags.tsx");
-/* harmony import */ var _components_Comments__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Comments */ "./components/Comments.tsx");
-/* harmony import */ var _components_AuthorInfo__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/AuthorInfo */ "./components/AuthorInfo.tsx");
-/* harmony import */ var _components_BackTop__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/BackTop */ "./components/BackTop.tsx");
-/* harmony import */ var _utils_Events__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../utils/Events */ "./utils/Events.tsx");
-/* harmony import */ var _utils_Utils__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../utils/Utils */ "./utils/Utils.tsx");
+/* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash/throttle */ "./node_modules/lodash/throttle.js");
+/* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash_throttle__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! next/router */ "./node_modules/next/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var react_swipeable_views__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-swipeable-views */ "./node_modules/react-swipeable-views/lib/index.js");
+/* harmony import */ var react_swipeable_views__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_swipeable_views__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var react_content_loader__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-content-loader */ "./node_modules/react-content-loader/dist/react-content-loader.es.js");
+/* harmony import */ var _components_ErrorPage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/ErrorPage */ "./components/ErrorPage.tsx");
+/* harmony import */ var _components_Tags__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Tags */ "./components/Tags.tsx");
+/* harmony import */ var _components_Comments__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Comments */ "./components/Comments.tsx");
+/* harmony import */ var _components_AuthorInfo__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/AuthorInfo */ "./components/AuthorInfo.tsx");
+/* harmony import */ var _components_BackTop__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/BackTop */ "./components/BackTop.tsx");
+/* harmony import */ var _utils_Events__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../utils/Events */ "./utils/Events.tsx");
+/* harmony import */ var _utils_Utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../utils/Utils */ "./utils/Utils.tsx");
 
 
 
@@ -450,6 +501,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var styles = {
   container: {
     display: 'flex',
@@ -459,6 +511,18 @@ var styles = {
     maxWidth: 992,
     flex: 1,
     width: 'inherit'
+  },
+  prevPost: {
+    right: 0,
+    position: 'fixed',
+    marginRight: 32,
+    fontSize: '1.25rem'
+  },
+  nextPost: {
+    left: 0,
+    position: 'relative',
+    marginLeft: 32,
+    fontSize: '1.25rem'
   },
   postHeader: {
     backgroundSize: 'cover',
@@ -528,21 +592,67 @@ function (_Component) {
       error: false
     });
 
+    _defineProperty(_assertThisInitialized(_this), "waitForPostContainer", function (content) {
+      _this.timeoutId = setTimeout(function () {
+        if (content) {
+          _this.attachEvents(content);
+
+          return;
+        }
+
+        var queryContent = document.querySelector('.blog-post');
+
+        _this.waitForPostContainer(queryContent);
+      }, 5);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "attachEvents", function (content) {
+      var centerHeight = content.clientHeight / 2;
+      var postPrev = document.getElementById('post-prev');
+
+      if (postPrev) {
+        postPrev.style.top = "".concat(content.scrollTop + centerHeight, "px");
+      }
+
+      var postNext = document.getElementById('post-next');
+
+      if (postNext) {
+        postNext.style.top = "".concat(content.scrollTop + centerHeight, "px");
+      }
+
+      content.addEventListener('scroll', lodash_throttle__WEBPACK_IMPORTED_MODULE_7___default()(function (e) {
+        var centerHeight = e.target.clientHeight / 2;
+        var postPrev = document.getElementById('post-prev');
+
+        if (postPrev) {
+          postPrev.style.top = "".concat(e.target.scrollTop + centerHeight, "px");
+        }
+
+        var postNext = document.getElementById('post-next');
+
+        if (postNext) {
+          postNext.style.top = "".concat(e.target.scrollTop + centerHeight, "px");
+        }
+      }, 200));
+    });
+
     _defineProperty(_assertThisInitialized(_this), "getPost", function (router, posts, authors) {
       var post = posts[router.query.slug];
 
       if (post) {
-        Object(_utils_Utils__WEBPACK_IMPORTED_MODULE_17__["setMetadatas"])(post);
+        Object(_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["setMetadatas"])(post);
         var author = authors[post.author];
 
         _this.setState({
           post: post,
           author: author
         }, function () {
-          _utils_Events__WEBPACK_IMPORTED_MODULE_16__["default"].emit('setpost', post);
+          _utils_Events__WEBPACK_IMPORTED_MODULE_17__["default"].emit('setpost', post);
         });
       } else {
         if (!lodash_isEmpty__WEBPACK_IMPORTED_MODULE_6___default()(posts)) {
+          clearTimeout(_this.timeoutId);
+
           _this.setState({
             post: {},
             error: true
@@ -553,13 +663,16 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleClickTag", function (e) {
       var tag = e.target.textContent;
-      next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push("/?tag=".concat(tag.trim()));
+      next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push("/?tag=".concat(tag.trim()));
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderSkeleton", function () {
       return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
         style: styles.viewContainer
-      }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react_content_loader__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react_content_loader__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        speed: 2,
+        primaryColor: "#f3f3f3",
+        secondaryColor: "#ecebeb",
         height: 900,
         width: 400
       }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("rect", {
@@ -587,7 +700,8 @@ function (_Component) {
   _createClass(Post, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      document.querySelector('.ant-layout-content').scrollTo(0, 0);
+      var content = document.querySelector('.blog-post');
+      this.waitForPostContainer(content);
       var _this$props = this.props,
           router = _this$props.router,
           posts = _this$props.posts,
@@ -605,7 +719,7 @@ function (_Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      _utils_Events__WEBPACK_IMPORTED_MODULE_16__["default"].emit('setpost', {});
+      _utils_Events__WEBPACK_IMPORTED_MODULE_17__["default"].emit('setpost', {});
     }
   }, {
     key: "render",
@@ -619,26 +733,35 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
         className: "container",
         style: styles.container
-      }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_8___default.a, {
+      }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_9___default.a, {
         title: post.title || 'Dev.log'
-      }), error ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_ErrorPage__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      }), error ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_ErrorPage__WEBPACK_IMPORTED_MODULE_12__["default"], {
         status: 404
-      }) : !lodash_isEmpty__WEBPACK_IMPORTED_MODULE_6___default()(post) ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react_swipeable_views__WEBPACK_IMPORTED_MODULE_9___default.a, {
+      }) : !lodash_isEmpty__WEBPACK_IMPORTED_MODULE_6___default()(post) ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react_swipeable_views__WEBPACK_IMPORTED_MODULE_10___default.a, {
+        className: "blog-post",
         enableMouseEvents: true,
         resistance: true,
         style: styles.viewContainer,
         index: post.prev ? 1 : 0,
         onChangeIndex: function onChangeIndex(index) {
-          if (index === 2) next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push(post.next);
-          if (index === 1) next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push(post.next);
-          if (index === 0) next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push(post.prev);
+          if (index === 2) next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push(post.next);
+          if (index === 1) next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push(post.next);
+          if (index === 0) next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push(post.prev);
         }
       }, [post].reduce(function (prev, curr) {
         if (curr.prev) {
           prev.push(react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
             key: curr.prev,
             style: styles.viewContainer
-          }));
+          }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
+            id: "post-prev",
+            style: styles.prevPost
+          }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_lib_icon__WEBPACK_IMPORTED_MODULE_3___default.a, {
+            type: "arrow-left",
+            style: {
+              marginRight: 4
+            }
+          }), "\uC774\uC804 \uAE00")));
         }
 
         prev.push(react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
@@ -670,7 +793,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_lib_icon__WEBPACK_IMPORTED_MODULE_3___default.a, {
           type: "tags",
           style: styles.tagsIcon
-        }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_Tags__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_Tags__WEBPACK_IMPORTED_MODULE_13__["default"], {
           tagStyle: {
             cursor: 'pointer'
           },
@@ -678,19 +801,29 @@ function (_Component) {
           onClick: _this2.handleClickTag
         })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_lib_divider__WEBPACK_IMPORTED_MODULE_1___default.a, null), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
           style: styles.authorInfo
-        }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_AuthorInfo__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_AuthorInfo__WEBPACK_IMPORTED_MODULE_15__["default"], {
           author: author
-        })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_lib_divider__WEBPACK_IMPORTED_MODULE_1___default.a, null), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_Comments__WEBPACK_IMPORTED_MODULE_13__["default"], null), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_BackTop__WEBPACK_IMPORTED_MODULE_15__["default"], null)));
+        })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_lib_divider__WEBPACK_IMPORTED_MODULE_1___default.a, null), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_Comments__WEBPACK_IMPORTED_MODULE_14__["default"], null)));
 
         if (curr.next) {
           prev.push(react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
             key: curr.next,
             style: styles.viewContainer
-          }));
+          }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
+            id: "post-next",
+            style: styles.nextPost
+          }, "\uB2E4\uC74C \uAE00", react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_lib_icon__WEBPACK_IMPORTED_MODULE_3___default.a, {
+            type: "arrow-right",
+            style: {
+              marginLeft: 4
+            }
+          }))));
         }
 
         return prev;
-      }, [])) : this.renderSkeleton());
+      }, [])), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_BackTop__WEBPACK_IMPORTED_MODULE_16__["default"], {
+        target: ".blog-post"
+      })) : this.renderSkeleton());
     }
   }]);
 
@@ -14873,6 +15006,86 @@ function stubFalse() {
 }
 
 module.exports = stubFalse;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/throttle.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/throttle.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var debounce = __webpack_require__(/*! ./debounce */ "./node_modules/lodash/debounce.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a throttled function that only invokes `func` at most once per
+ * every `wait` milliseconds. The throttled function comes with a `cancel`
+ * method to cancel delayed `func` invocations and a `flush` method to
+ * immediately invoke them. Provide `options` to indicate whether `func`
+ * should be invoked on the leading and/or trailing edge of the `wait`
+ * timeout. The `func` is invoked with the last arguments provided to the
+ * throttled function. Subsequent calls to the throttled function return the
+ * result of the last `func` invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the throttled function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.throttle` and `_.debounce`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to throttle.
+ * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=true]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new throttled function.
+ * @example
+ *
+ * // Avoid excessively updating the position while scrolling.
+ * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+ *
+ * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+ * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+ * jQuery(element).on('click', throttled);
+ *
+ * // Cancel the trailing throttled invocation.
+ * jQuery(window).on('popstate', throttled.cancel);
+ */
+function throttle(func, wait, options) {
+  var leading = true,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  if (isObject(options)) {
+    leading = 'leading' in options ? !!options.leading : leading;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  return debounce(func, wait, {
+    'leading': leading,
+    'maxWait': wait,
+    'trailing': trailing
+  });
+}
+
+module.exports = throttle;
 
 
 /***/ }),

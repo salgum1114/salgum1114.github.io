@@ -27659,8 +27659,8 @@ Not supports in Firefox and IE */
   }
 }
 .blog-backtop {
-  width: 40px;
-  height: 40px;
+  width: 0;
+  height: 0;
   position: fixed;
   bottom: 16px;
   right: 16px;
@@ -27669,14 +27669,13 @@ Not supports in Firefox and IE */
   opacity: 0;
 }
 .blog-backtop.visible {
+  width: 40px;
+  height: 40px;
   opacity: 1;
   transform: translateY(0);
 }
 .ant-layout {
   background-color: #fff;
-}
-.ant-layout-content {
-  scroll-behavior: smooth;
 }
 
 
