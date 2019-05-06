@@ -442,7 +442,7 @@ function (_Component) {
           }, author.name.charAt(0).toUpperCase()),
           title: react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("h2", {
             className: "ant-card-meta-title"
-          }, metadata.title.length > 30 ? metadata.title.substring(0, 30).concat('...') : metadata.title),
+          }, metadata.title),
           description: moment__WEBPACK_IMPORTED_MODULE_7___default()(metadata.date).fromNow()
         }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
           style: styles.cardPreview
@@ -54667,14 +54667,11 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Posts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Posts */ "./components/Posts.tsx");
-
+/* harmony import */ var _components_Posts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Posts */ "./components/Posts.tsx");
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Posts__WEBPACK_IMPORTED_MODULE_2__["default"], props);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Posts__WEBPACK_IMPORTED_MODULE_1__["default"], props);
 });
     (function (Component, route) {
       if(!Component) return
@@ -54739,7 +54736,7 @@ var setMetadatas = function setMetadatas(post) {
 
 /***/ }),
 
-/***/ 11:
+/***/ 14:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -54764,5 +54761,5 @@ module.exports = dll_0f247e9cceb355cd81a4;
 
 /***/ })
 
-},[[11,"static/runtime/webpack.js","styles"]]]));;
+},[[14,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map

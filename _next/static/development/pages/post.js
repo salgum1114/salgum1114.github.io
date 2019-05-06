@@ -406,7 +406,7 @@ var ErrorPage = function ErrorPage(props) {
     style: getImage(props.status)
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "blog-error-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.status || 0, " \uD398\uC774\uC9C0\uB97C \uCC3E\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4.")));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.status || 404, " \uD398\uC774\uC9C0\uB97C \uCC3E\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4.")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ErrorPage);
@@ -41231,7 +41231,7 @@ var setMetadatas = function setMetadatas(post) {
 
 /***/ }),
 
-/***/ 16:
+/***/ 11:
 /*!*****************************!*\
   !*** multi ./pages/post.js ***!
   \*****************************/
@@ -41256,5 +41256,5 @@ module.exports = dll_0f247e9cceb355cd81a4;
 
 /***/ })
 
-},[[16,"static/runtime/webpack.js","styles"]]]));;
+},[[11,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=post.js.map
