@@ -4829,7 +4829,7 @@ a.ant-btn-sm {
 .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled),
 .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
   font-weight: 600;
-  background: #f5f5f5;
+  background-color: #fafafa;
 }
 .ant-cascader-menu-item-expand {
   position: relative;
@@ -6994,6 +6994,8 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
 }
 .ant-drawer-mask {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 0;
   background-color: rgba(0, 0, 0, 0.65);
@@ -14279,19 +14281,19 @@ textarea.ant-pagination-options-quick-jumper input {
   cursor: not-allowed;
 }
 .ant-pagination.ant-pagination-disabled .ant-pagination-item {
-  cursor: not-allowed;
-  border-color: #d9d9d9;
   background: #f5f5f5;
+  border-color: #d9d9d9;
+  cursor: not-allowed;
 }
 .ant-pagination.ant-pagination-disabled .ant-pagination-item a {
-  cursor: not-allowed;
   color: rgba(0, 0, 0, 0.25);
   background: transparent;
   border: none;
+  cursor: not-allowed;
 }
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-active {
-  border-color: transparent;
   background: #dbdbdb;
+  border-color: transparent;
 }
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-active a {
   color: #fff;
@@ -14299,10 +14301,10 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-link,
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-link:hover,
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-link:focus {
-  border-color: #d9d9d9;
   color: #999999;
-  cursor: not-allowed;
   background: #f5f5f5;
+  border-color: #d9d9d9;
+  cursor: not-allowed;
 }
 .ant-pagination.ant-pagination-disabled .ant-pagination-jump-prev:focus .ant-pagination-item-link-icon,
 .ant-pagination.ant-pagination-disabled .ant-pagination-jump-next:focus .ant-pagination-item-link-icon,
@@ -15946,8 +15948,8 @@ span.ant-radio + * {
   position: relative;
   display: inline-block;
   font-size: 20px;
-  width: 20px;
-  height: 20px;
+  width: 1em;
+  height: 1em;
 }
 .ant-spin-dot-item {
   position: absolute;
@@ -15986,8 +15988,6 @@ span.ant-radio + * {
 }
 .ant-spin-sm .ant-spin-dot {
   font-size: 14px;
-  width: 14px;
-  height: 14px;
 }
 .ant-spin-sm .ant-spin-dot i {
   width: 6px;
@@ -15995,8 +15995,6 @@ span.ant-radio + * {
 }
 .ant-spin-lg .ant-spin-dot {
   font-size: 32px;
-  width: 32px;
-  height: 32px;
 }
 .ant-spin-lg .ant-spin-dot i {
   width: 14px;
@@ -25230,8 +25228,8 @@ Not supports in Firefox and IE */
   position: relative;
   display: inline-block;
   font-size: 20px;
-  width: 20px;
-  height: 20px;
+  width: 1em;
+  height: 1em;
 }
 .ant-spin-dot-item {
   position: absolute;
@@ -25270,8 +25268,6 @@ Not supports in Firefox and IE */
 }
 .ant-spin-sm .ant-spin-dot {
   font-size: 14px;
-  width: 14px;
-  height: 14px;
 }
 .ant-spin-sm .ant-spin-dot i {
   width: 6px;
@@ -25279,8 +25275,6 @@ Not supports in Firefox and IE */
 }
 .ant-spin-lg .ant-spin-dot {
   font-size: 32px;
-  width: 32px;
-  height: 32px;
 }
 .ant-spin-lg .ant-spin-dot i {
   width: 14px;
